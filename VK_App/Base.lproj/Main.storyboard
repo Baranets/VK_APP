@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,77 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mountainsImage" translatesAutoresizingMaskIntoConstraints="NO" id="r4S-Yb-Y6N">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="310" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85v-5B-MBE">
+                                <rect key="frame" x="32.666666666666657" y="698" width="310" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.3491967429577465" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" red="0.99965180870000003" green="1" blue="0.97649979379999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Авторизация через логин и пароль">
+                                    <color key="titleColor" red="0.99965180870000003" green="1" blue="0.97649979379999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logIning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hfk-nz-KKF"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a23-aE-by9">
+                                <rect key="frame" x="67.666666666666686" y="346" width="240" height="130"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zmf-VS-Qxs">
+                                        <rect key="frame" x="5" y="77" width="230" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email, Логин, Номер телефона" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mxu-S8-G4A">
+                                        <rect key="frame" x="5" y="21" width="230" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="VRs-E4-eEt"/>
+                                    <constraint firstAttribute="width" constant="240" id="taL-N6-51J"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="r4S-Yb-Y6N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-44" id="4vR-7E-17P"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="r4S-Yb-Y6N" secondAttribute="bottom" constant="-34" id="JXN-R0-NGO"/>
+                            <constraint firstItem="r4S-Yb-Y6N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TQ8-CQ-C2F"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="r4S-Yb-Y6N" secondAttribute="trailing" id="YzA-o2-Pfp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="85v-5B-MBE" secondAttribute="bottom" constant="50" id="ea8-QJ-KQ2"/>
+                            <constraint firstItem="85v-5B-MBE" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jX4-vF-6ZT"/>
+                            <constraint firstItem="a23-aE-by9" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="uYw-fX-lkb"/>
+                            <constraint firstItem="a23-aE-by9" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="wPt-eF-HgJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="WZL-Wf-lIY"/>
+                    <connections>
+                        <outlet property="imageView" destination="r4S-Yb-Y6N" id="cEs-Wi-ldf"/>
+                        <outlet property="logButton" destination="85v-5B-MBE" id="j1C-up-Zem"/>
+                        <outlet property="loginTextField" destination="Mxu-S8-G4A" id="Qmk-IQ-uL6"/>
+                        <outlet property="passwordTextField" destination="Zmf-VS-Qxs" id="nl4-Qu-6gt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="133.59999999999999" y="129.31034482758622"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mountainsImage" width="5120" height="3684"/>
+    </resources>
 </document>
