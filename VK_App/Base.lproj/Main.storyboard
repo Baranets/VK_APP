@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mountainsImage" translatesAutoresizingMaskIntoConstraints="NO" id="r4S-Yb-Y6N">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="-44" y="0.0" width="463" height="812"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="310" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85v-5B-MBE">
                                 <rect key="frame" x="32.666666666666657" y="698" width="310" height="30"/>
@@ -61,8 +61,8 @@
                         <constraints>
                             <constraint firstItem="r4S-Yb-Y6N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-44" id="4vR-7E-17P"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="r4S-Yb-Y6N" secondAttribute="bottom" constant="-34" id="JXN-R0-NGO"/>
-                            <constraint firstItem="r4S-Yb-Y6N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TQ8-CQ-C2F"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="r4S-Yb-Y6N" secondAttribute="trailing" id="YzA-o2-Pfp"/>
+                            <constraint firstItem="r4S-Yb-Y6N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-44" id="TQ8-CQ-C2F"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="r4S-Yb-Y6N" secondAttribute="trailing" constant="-44" id="YzA-o2-Pfp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="85v-5B-MBE" secondAttribute="bottom" constant="50" id="ea8-QJ-KQ2"/>
                             <constraint firstItem="85v-5B-MBE" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jX4-vF-6ZT"/>
                             <constraint firstItem="a23-aE-by9" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="uYw-fX-lkb"/>
@@ -80,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.59999999999999" y="129.31034482758622"/>
+            <point key="canvasLocation" x="131.52709359605913" y="128.80000000000001"/>
         </scene>
     </scenes>
     <resources>
