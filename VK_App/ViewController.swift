@@ -1,7 +1,6 @@
 //
 //  ViewController.swift
 //  VK_App
-///Users/maxim/Desktop/VK_App/VK_App/UserStoryViewController.swift
 //  Created by Maxim on 19.08.2018.
 //  Copyright © 2018 Maxim. All rights reserved.
 //
@@ -56,9 +55,9 @@ class ViewController: UIViewController {
     }
     
     ///Печатает в консоль введенные логин и пароль
-    func printInfoAboutUser(login: String, password: String) {
-        print("Логин: \(loginTextField.text ?? "Поле ввода логина пустое")" )
-        print("Пароль: \(passwordTextField.text ?? "Поле ввода пароля пустое")" )
+    func printInfoAboutUser(login: String?, password: String?) {
+        print("Логин: \(login ?? "Поле ввода логина пустое")" )
+        print("Пароль: \(password ?? "Поле ввода пароля пустое")" )
     }
 
 }
