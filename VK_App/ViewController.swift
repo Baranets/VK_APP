@@ -35,7 +35,7 @@ class ViewController: UIViewController {
             return
         }
         
-        guard login != "" || password != "" else {
+        guard login != "" && password != "" else {
             createAlert(title: "Ошибка авторизации", message: "Логин или пароль не указаны")
             return
         }
