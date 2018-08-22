@@ -1,7 +1,7 @@
 //
 //  ViewController.swift
 //  VK_App
-//
+///Users/maxim/Desktop/VK_App/VK_App/UserStoryViewController.swift
 //  Created by Maxim on 19.08.2018.
 //  Copyright © 2018 Maxim. All rights reserved.
 //
@@ -24,12 +24,39 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //coming soon
+    ///Функция предназначена для аунтификации пользователя и последующему переходу в приложение
     @IBAction func logIning(_ sender: UIButton) {
-        printInfoAboutUser()
+        guard let login = loginTextField.text else {
+            createAlert(title: "Ошибка авторизации", message: "Логин не обнаружен")
+            return
+        }
+        
+        guard let password = passwordTextField.text else {
+            createAlert(title: "Ошибка авторизации", message: "Пароль не обнаружен")
+            return
+        }
+        
+        guard login != "" || password != "" else {
+            createAlert(title: "Ошибка авторизации", message: "Логин или пароль не указаны")
+            return
+        }
+        
+        printInfoAboutUser(login: login, password: password)
+        performSegue(withIdentifier: "logined", sender: nil)
+    
     }
     
-    func printInfoAboutUser() {
+    ///Создает Классический Alert. Выводит текст и имеет одну кнопку "ОК" для закрытия Alert'а
+    func createAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    ///Печатает в консоль введенные логин и пароль
+    func printInfoAboutUser(login: String, password: String) {
         print("Логин: \(loginTextField.text ?? "Поле ввода логина пустое")" )
         print("Пароль: \(passwordTextField.text ?? "Поле ввода пароля пустое")" )
     }
