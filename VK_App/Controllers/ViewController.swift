@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  VK_App
-//  Created by Maxim on 19.08.2018.
-//  Copyright © 2018 Maxim. All rights reserved.
-//
 
 import UIKit
 
@@ -26,17 +20,17 @@ class ViewController: UIViewController {
     ///Функция предназначена для аунтификации пользователя и последующему переходу в приложение
     @IBAction func logIning(_ sender: UIButton) {
         guard let login = loginTextField.text else {
-            createAlert(title: "Ошибка авторизации", message: "Логин не обнаружен")
+            showAlert(title: "Ошибка авторизации", message: "Логин не обнаружен")
             return
         }
         
         guard let password = passwordTextField.text else {
-            createAlert(title: "Ошибка авторизации", message: "Пароль не обнаружен")
+            showAlert(title: "Ошибка авторизации", message: "Пароль не обнаружен")
             return
         }
         
         guard login != "" && password != "" else {
-            createAlert(title: "Ошибка авторизации", message: "Логин или пароль не указаны")
+            showAlert(title: "Ошибка авторизации", message: "Логин или пароль не указаны")
             return
         }
         
@@ -46,12 +40,10 @@ class ViewController: UIViewController {
     }
     
     ///Создает Классический Alert. Выводит текст и имеет одну кнопку "ОК" для закрытия Alert'а
-    func createAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
+    func showAlert(title: String, message: String) {
+        let alertFactory = AlertFactory()
+        let alert = alertFactory.createAlert(title: title, message: message)
+        alertFactory.showAlert(parentViewController: self, alert: alert)
     }
     
     ///Печатает в консоль введенные логин и пароль
