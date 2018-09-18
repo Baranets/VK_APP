@@ -10,6 +10,7 @@
 		5043DB6E215063D3007B4E4A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5043DB6D215063D3007B4E4A /* WebViewController.swift */; };
 		5043DB7121506FCB007B4E4A /* VK_API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5043DB7021506FCB007B4E4A /* VK_API.swift */; };
 		5043DB73215088F2007B4E4A /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5043DB72215088F2007B4E4A /* Alert.swift */; };
+		50E05FE221514B3B0077161D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50E05FE121514B390077161D /* Assets.xcassets */; };
 		9435CF85212D7FC7002689E7 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9435CF84212D7FC7002689E7 /* AlertBuilder.swift */; };
 		943A5DD021314E4D00D5F27C /* UserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943A5DCF21314E4D00D5F27C /* UserProtocol.swift */; };
 		943A5DD22131535100D5F27C /* UserImageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943A5DD12131535100D5F27C /* UserImageProtocol.swift */; };
@@ -21,7 +22,6 @@
 		9471E35A2128F86300730643 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9471E3582128F86300730643 /* LaunchScreen.storyboard */; };
 		947EA06D212D2A2100490D35 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947EA06C212D2A2100490D35 /* FriendsTableViewController.swift */; };
 		947EA06F212D502000490D35 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947EA06E212D502000490D35 /* GroupsTableViewController.swift */; };
-		947EF4D62131C75F00601FC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 947EF4D52131C75F00601FC4 /* Assets.xcassets */; };
 		94E4341A2131DD5300FC890B /* GroupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E434192131DD5300FC890B /* GroupProtocol.swift */; };
 		94E4341C2131DDB200FC890B /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4341B2131DDB200FC890B /* Group.swift */; };
 		94EA34B8213088D600EE22E1 /* ImagesFriendCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA34B7213088D600EE22E1 /* ImagesFriendCollectionViewController.swift */; };
@@ -33,6 +33,7 @@
 		5043DB6D215063D3007B4E4A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		5043DB7021506FCB007B4E4A /* VK_API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VK_API.swift; sourceTree = "<group>"; };
 		5043DB72215088F2007B4E4A /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		50E05FE121514B390077161D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64D3E27EF30EB773AB63EF4B /* Pods-VK_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VK_App/Pods-VK_App.debug.xcconfig"; sourceTree = "<group>"; };
 		710D4125137E0F8DA256F06F /* Pods-VK_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_App.release.xcconfig"; path = "Pods/Target Support Files/Pods-VK_App/Pods-VK_App.release.xcconfig"; sourceTree = "<group>"; };
 		9435CF84212D7FC7002689E7 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		9471E35B2128F86300730643 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		947EA06C212D2A2100490D35 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		947EA06E212D502000490D35 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
-		947EF4D52131C75F00601FC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94E434192131DD5300FC890B /* GroupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupProtocol.swift; sourceTree = "<group>"; };
 		94E4341B2131DDB200FC890B /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		94EA34B7213088D600EE22E1 /* ImagesFriendCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesFriendCollectionViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 				9471E3532128F86200730643 /* Main.storyboard */,
 				9471E3582128F86300730643 /* LaunchScreen.storyboard */,
 				9471E35B2128F86300730643 /* Info.plist */,
-				947EF4D52131C75F00601FC4 /* Assets.xcassets */,
+				50E05FE121514B390077161D /* Assets.xcassets */,
 			);
 			path = VK_App;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9471E35A2128F86300730643 /* LaunchScreen.storyboard in Resources */,
-				947EF4D62131C75F00601FC4 /* Assets.xcassets in Resources */,
+				50E05FE221514B3B0077161D /* Assets.xcassets in Resources */,
 				9471E3552128F86200730643 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

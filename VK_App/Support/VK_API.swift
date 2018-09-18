@@ -49,7 +49,12 @@ class VK_API {
         //Возвращает JSON с id друзей пользователя
         Alamofire.request(urlComponents.url!).responseJSON { response in
             //Печать в консоль полученного JSON
-            print(response.value ?? "friendList")
+            switch response.result {
+            case .success(let value):
+                print(value)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -72,7 +77,12 @@ class VK_API {
         
         Alamofire.request(urlComponents.url!).responseJSON { response in
             //Печать в консоль полученного JSON
-            print(response.value ?? "photoList")
+            switch response.result {
+            case .success(let value):
+                print(value)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -95,7 +105,12 @@ class VK_API {
         
         Alamofire.request(urlComponents.url!).responseJSON { response in
             //Печать в консоль полученного JSON
-            print(response.value ?? "photoList")
+            switch response.result {
+            case .success(let value):
+                print(value)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -118,7 +133,12 @@ class VK_API {
         
         Alamofire.request(urlComponents.url!).responseJSON { response in
             //Печать в консоль полученного JSON
-            print(response.value ?? "photoList")
+            switch response.result {
+            case .success(let value):
+                print(value)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
