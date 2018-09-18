@@ -19,31 +19,27 @@ class ViewController: UIViewController {
     
     ///Функция предназначена для аунтификации пользователя и последующему переходу в приложение
     @IBAction func logIning(_ sender: UIButton) {
-        guard let login = loginTextField.text else {
-            showAlert(title: "Ошибка авторизации", message: "Логин не обнаружен")
-            return
-        }
-        
-        guard let password = passwordTextField.text else {
-            showAlert(title: "Ошибка авторизации", message: "Пароль не обнаружен")
-            return
-        }
-        
-        guard login != "" && password != "" else {
-            showAlert(title: "Ошибка авторизации", message: "Логин или пароль не указаны")
-            return
-        }
-        
-        printInfoAboutUser(login: login, password: password)
-        performSegue(withIdentifier: "logined", sender: nil)
-    
+//        guard let login = loginTextField.text else {
+//            showAlert(title: "Ошибка авторизации", message: "Логин не обнаружен")
+//            return
+//        }
+//
+//        guard let password = passwordTextField.text else {
+//            showAlert(title: "Ошибка авторизации", message: "Пароль не обнаружен")
+//            return
+//        }
+//        guard login != "" && password != "" else {
+//            showAlert(title: "Ошибка авторизации", message: "Логин или пароль не указаны")
+//            return
+//        }
+//        performSegue(withIdentifier: "logined", sender: nil)
     }
     
     ///Создает Классический Alert. Выводит текст и имеет одну кнопку "ОК" для закрытия Alert'а
     func showAlert(title: String, message: String) {
-        let alertFactory = AlertFactory()
-        let alert = alertFactory.createAlert(title: title, message: message)
-        alertFactory.showAlert(parentViewController: self, alert: alert)
+        let alert = AlertBuilder().createAlert(title: title, message: message) as! Alert
+        
+        alert.showAlert(parentViewController: self, alert: alert)
     }
     
     ///Печатает в консоль введенные логин и пароль

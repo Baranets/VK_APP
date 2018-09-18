@@ -10,6 +10,8 @@ class ImagesFriendViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        VK_API().getUserPhotos(owner_id: nil)
 
         //Добавить уже скаченную картинку Автарку
         userImages = UserImage(user: user, images: [user.avatar])

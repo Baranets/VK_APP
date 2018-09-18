@@ -14,6 +14,8 @@ class GroupsWorldViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        VK_API().getSearchedGroups(searched: "Music")
+        
         filteredGroups = groups
         searchBar.delegate = self
     }

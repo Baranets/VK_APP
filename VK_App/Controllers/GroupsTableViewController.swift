@@ -14,6 +14,8 @@ class GroupsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        VK_API().getUserGroups(user_id: nil)
+        
         filteredGroups = groups
         searchBar.delegate = self
     }

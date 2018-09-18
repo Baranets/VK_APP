@@ -11,7 +11,8 @@ class FriendsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        VK_API().getUserFriendList(user_id: nil)
     }
 
     override func didReceiveMemoryWarning() {
