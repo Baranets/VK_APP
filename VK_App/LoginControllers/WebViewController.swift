@@ -2,22 +2,13 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController{
-    
-    
 
-    @IBOutlet weak var webView: WKWebView! {
-        didSet {
-            webView.navigationDelegate = self
-        }
-    }
-    
+    //MARK: - View Functions
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let request = VK_API().requestLoginView()
-        
         webView.load(request)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +18,12 @@ class WebViewController: UIViewController{
     
     @IBAction func cancelButtonAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBOutlet weak var webView: WKWebView! {
+        didSet {
+            webView.navigationDelegate = self
+        }
     }
     
     /*
@@ -40,24 +37,18 @@ class WebViewController: UIViewController{
     */
 }
 
+//MARK: - Extension WKNavigationDelegate
+
 extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment else {
             decisionHandler(.allow)
             return
         }
-        
         guard VK_API().getToken(fragment: fragment) != nil else {
             return
         }
-        
         performSegue(withIdentifier: "logined", sender: nil)
-        
         decisionHandler(.cancel)
     }
-    
-    
-    
-    
-    
 }
