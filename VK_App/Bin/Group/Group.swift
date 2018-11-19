@@ -10,18 +10,21 @@ class Group: Entity {
     var photo: UIImage?
     
     ///[EN]Identification number of the Group /[RU]Идентификационный номер группы
-    var id: Int
+    var id: Int = 0
+    
     ///[EN] URL of the group image /[RU] URL фотографии группы
     var photoURL: URL?
+    
     ///[EN] URL of the group image(large) /[RU] URL фотографии(большой) группы
     var largePhotoURL: URL?
+    
     ///[EN] Large Photo (UIImage) of the Group /[RU] Большая Фотография (UIImage) Группы
     var largePhoto: UIImage?
     var countSubscribers: Int?
     
     //MARK: - Inits
     
-    init() {
+    required init() {
         self.id = 0
         self.name = "noNameGroup"
         self.photo = UIImage(named: "people")!

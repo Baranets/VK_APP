@@ -25,16 +25,23 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0LO-fI-rxu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="00K-4f-Ki6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="0LO-fI-rxu" secondAttribute="top" constant="20" id="2ke-W7-71c"/>
+                            <constraint firstItem="0LO-fI-rxu" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="7rk-e1-jFd"/>
+                            <constraint firstItem="0LO-fI-rxu" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="9bg-cJ-TRM"/>
+                            <constraint firstItem="0LO-fI-rxu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DAr-HX-STv"/>
                             <constraint firstItem="0LO-fI-rxu" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Fjq-XU-s8B"/>
+                            <constraint firstItem="0LO-fI-rxu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="GRR-hM-Ezp"/>
                             <constraint firstItem="0LO-fI-rxu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UQo-hW-9b9"/>
                             <constraint firstItem="0LO-fI-rxu" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Wxc-cV-e2Y"/>
+                            <constraint firstItem="0LO-fI-rxu" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Yla-hW-Y7M"/>
+                            <constraint firstItem="0LO-fI-rxu" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nQo-oT-odE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="373.76311844077964"/>
+            <point key="canvasLocation" x="52" y="372.86356821589209"/>
         </scene>
     </scenes>
     <resources>

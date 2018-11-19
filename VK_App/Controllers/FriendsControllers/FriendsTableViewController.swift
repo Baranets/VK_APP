@@ -47,8 +47,8 @@ class FriendsViewController: UITableViewController {
             
             let user = users[indexPath.row]
             nameFriendLabel.text = user.fullName
-            onlineFriendLabel.text = (user.isOnline ?? false) ? "online" : "offline"
-            onlineFriendLabel.textColor = (user.isOnline ?? false) ? UIColor.green : UIColor.gray
+            onlineFriendLabel.text = (user.isOnline) ? "online" : "offline"
+            onlineFriendLabel.textColor = (user.isOnline) ? UIColor.green : UIColor.gray
             guard let url = user.photoURL else { return cell }
             imageFriend.downloadPhoto(fromURL: url, imageCache: imageCache)
             user.photo = imageFriend.image

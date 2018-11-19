@@ -14,6 +14,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        
+        if let userToken = UserDefaults.standard.string(forKey: "userToken") {
+            VK_API.globalToken = userToken
+            let friendView = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+            self.navigationController?.pushViewController(friendView, animated: true)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,8 +47,17 @@ class ViewController: UIViewController {
             return
         }
     */
-        performSegue(withIdentifier: "logined", sender: nil)
+        
+        let userDefualts = UserDefaults.standard
+        guard let userToken = userDefualts.string(forKey: "userToken") else {
+            performSegue(withIdentifier: "logined", sender: nil)
+            return
+        }
+        
+        VK_API.globalToken = userToken
+        performSegue(withIdentifier: "loginDone", sender: nil)
     }
+
     
     ///[EN]Creating Classic Alert. Show the text of Alert and the button "OK" /[RU]Создает Классический Alert. Выводит текст и имеет одну кнопку "ОК" для закрытия Alert'а
     func showAlert(title: String, message: String) {

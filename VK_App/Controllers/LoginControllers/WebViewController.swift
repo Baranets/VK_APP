@@ -26,15 +26,6 @@ class WebViewController: UIViewController{
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 //MARK: - Extension WKNavigationDelegate
@@ -45,9 +36,11 @@ extension WebViewController: WKNavigationDelegate {
             decisionHandler(.allow)
             return
         }
-        guard VK_API().getToken(fragment: fragment) != nil else {
+        guard let token = VK_API().getToken(fragment: fragment) else {
             return
         }
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(token, forKey: "userToken")
         performSegue(withIdentifier: "logined", sender: nil)
         decisionHandler(.cancel)
     }

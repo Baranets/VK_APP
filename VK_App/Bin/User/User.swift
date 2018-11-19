@@ -13,10 +13,12 @@ class User: Human {
     
     ///[EN] URL of the photo /[RU] URL фотографии
     var photoURL: URL?
+    
     ///[EN] Photo (UIImage) of the User /[RU] Фотография (UIImage) пользователя
     var photo: UIImage?
+    
     ///[EN] Bool variable to check is User Online  /[RU] Bool переменная для проверки онлайн ли пользователь
-    var isOnline: Bool?
+    var isOnline: Bool = false
     
     //MARK: - Functions
     
