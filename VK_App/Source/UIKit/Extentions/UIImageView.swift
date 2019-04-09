@@ -6,7 +6,7 @@ import AlamofireImage
 extension UIImageView {
     
     ///[EN]Download Photo from URL and optionally add it to the Cache /[RU]Загружает Фото по указанному URL и опционально добавляет его в в Кэш
-    func downloadPhoto(fromURL: URL, imageCache: AutoPurgingImageCache?) {
+    func downloadImage(fromURL: URL, imageCache: AutoPurgingImageCache?) {
         let key = fromURL
         
         let urlRequest = URLRequest(url: fromURL)

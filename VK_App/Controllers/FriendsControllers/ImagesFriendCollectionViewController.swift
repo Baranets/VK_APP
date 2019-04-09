@@ -56,7 +56,7 @@ class ImagesFriendViewController: UICollectionViewController {
         let userPhoto = userImages[indexPath.row]
         
         guard let url = URL(string: userPhoto.urlString) else { return cell }
-        imageUsers.downloadPhoto(fromURL: url, imageCache: imageCache)
+        imageUsers.downloadImage(fromURL: url, imageCache: imageCache)
         
     
         return cell

@@ -71,7 +71,7 @@ class GroupsWorldViewController: UITableViewController {
         groupNameLabel.text = group.name
         
         guard let url = URL(string: group.urlPhotoString ?? "") else { return cell }
-        groupImage.downloadPhoto(fromURL: url, imageCache: nil)
+        groupImage.downloadImage(fromURL: url, imageCache: nil)
         
         return cell
     }

@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 import AlamofireImage
 
 class GroupsViewController: UITableViewController {
@@ -9,12 +10,13 @@ class GroupsViewController: UITableViewController {
     let searchBarController = UISearchController(searchResultsController: nil)
     let searchBar = UISearchBar()
     
-    //MARK: - Variables
+    let realm = try! Realm()
+    var groups: Results<Group>?
     
-    ///[EN]Array with full list of groups of the user /[RU]Массив с полным списком групп пользователя
-    var groups         = [Group]()
-    ///[EN]Array with filtered list of groups /[RU]Массив с отфильтрованным списком групп
-    var filteredGroups = [Group]()
+//    ///[EN]Array with full list of groups of the user /[RU]Массив с полным списком групп пользователя
+//    var groups         = [Group]()
+//    ///[EN]Array with filtered list of groups /[RU]Массив с отфильтрованным списком групп
+//    var filteredGroups = [Group]()
     
     ///[EN]Cache for Photos /[RU]Кэш для фотографий
     let imageCache = AutoPurgingImageCache(
@@ -29,9 +31,9 @@ class GroupsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        downloadItems()
-        
-        refreshcontrol.addTarget(self, action: #selector (GroupsViewController.refreshData), for: UIControl.Event.valueChanged)
+        self.groups = loadRealmData()
+   
+        refreshcontrol.addTarget(self, action: #selector (GroupsViewController.loadData), for: UIControl.Event.valueChanged)
         
         tableview.refreshControl = self.refreshcontrol
         
@@ -41,9 +43,8 @@ class GroupsViewController: UITableViewController {
         self.navigationItem.searchController = searchBarController
         self.navigationItem.hidesSearchBarWhenScrolling = true
         searchBarController.searchBar.delegate = self
-
-//        navigationItem.titleView = searchBar
-//        searchBar.delegate = self
+        
+        loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,7 +63,7 @@ class GroupsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredGroups.count
+        return groups?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,13 +73,13 @@ class GroupsViewController: UITableViewController {
             guard let groupNameLabel: UILabel = cell.viewWithTag(1) as? UILabel     else { return cell}
             guard let groupImage: UIImageView = cell.viewWithTag(2) as? UIImageView else { return cell}
             
-            let group = filteredGroups[indexPath.row]
+            guard let group = groups?[indexPath.row] else { return cell }
             
             groupNameLabel.text = group.name
             
             guard let url = URL(string: group.urlPhotoString ?? "") else { return cell }
     
-            groupImage.downloadPhoto(fromURL: url, imageCache: imageCache)
+            groupImage.downloadImage(fromURL: url, imageCache: imageCache)
         }
         
         return cell
@@ -88,28 +89,42 @@ class GroupsViewController: UITableViewController {
         //[EN]Handling an event with deleting an object from the UITableView /[RU]Обработка события с удалением объект из UITableView
         UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let groupID = self.filteredGroups[indexPath.row].id
-            DispatchQueue.global().async {
-                self.filteredGroups.remove(at: indexPath.row)
-                DispatchQueue.main.async {
-                    self.tableview.deleteRows(at: [indexPath], with: .fade)
+            guard let group = self.groups?[indexPath.row] else { return }
+            VK_Group().leaveGroup(byGroupID: group.id) { [weak self] in
+                try! self?.realm.write {
+                    self?.realm.delete(group)
+                    self?.tableview.deleteRows(at: [indexPath], with: .fade)
                 }
             }
-            DispatchQueue.global().async {
-                VK_Group().leaveGroup(byGroupID: groupID)
-                DispatchQueue.main.async {
-                    self.searchBarController.searchBar.text = ""
-                    self.refreshData()
-                }
-            }
+  
         }
     }
     
-    // MARK: - Navigation
-    
+ 
     // Метод предназначен для дальнейшей навигации по UI в зависимости от нажатой строчки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    @objc private func loadData() {
+        VK_Group().getUserGroups(user_id: nil, completion: {[weak self] groups in
+            self?.writeData(groups: groups) {
+                self?.tableview.reloadData()
+                self?.tableview.refreshControl?.endRefreshing()
+            }
+        })
+    }
+    
+    
+    private func writeData(groups: [Group], completion: @escaping(() -> Void)) {
+        try! realm.write {
+            realm.add(groups, update: true)
+            completion()
+        }
+    }
+    
+    private func loadRealmData() -> Results<Group>  {
+        return realm.objects(Group.self).sorted(byKeyPath: "name", ascending: true)
     }
     
 }
@@ -119,39 +134,20 @@ class GroupsViewController: UITableViewController {
 extension GroupsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard !searchText.isEmpty else {
-            filteredGroups = groups
+        guard !searchText.isEmpty, let text = searchBar.text else {
+            groups = self.loadRealmData()
             tableview.reloadData()
-            return}
-        filteredGroups = groups.filter({ group -> Bool in
-            guard let text = searchBar.text?.lowercased() else { return false }
-            return group.name.lowercased().contains(text)
-        })
+            return
+        }
+        
+        groups = self.loadRealmData().filter("name contains '\(text )'")
         tableview.reloadData()
     }
     
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        groups = self.loadRealmData()
+        tableview.reloadData()
     }
     
-    private func downloadItems() {
-        VK_Group().getUserGroups(user_id: nil, completion: {[weak self] groups in
-            self?.groups = groups
-            self?.filteredGroups = groups
-            self?.tableview.reloadData()
-            self?.tableview.refreshControl?.endRefreshing()
-        })
-    }
-}
 
-//MARK: - Functions for UIRefreshControl
-extension GroupsViewController {
-    
-    ///Download data and refresh the UITableView
-    @objc func refreshData() {
-        groups.removeAll()
-        filteredGroups.removeAll()
-        downloadItems()
-    }
-    
 }

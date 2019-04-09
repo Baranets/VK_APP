@@ -84,7 +84,7 @@ class VK_Group: VK_API {
     }
     
     ///[EN]Send the request for "leave the Group" /[RU]Отправляет запрос "покинуть сообщество"
-    func leaveGroup(byGroupID group_id: Int) {
+    func leaveGroup(byGroupID group_id: Int, completion: @escaping(() -> Void)) {
         guard group_id >= 1 else { return }
         
         //[EN]Create a URL request /[RU]Формируем URL запрос
@@ -102,7 +102,7 @@ class VK_Group: VK_API {
         //[EN]Treatment of the JSON /[RU]Обработка JSON
         Alamofire.request(urlComponents.url!).responseData { response in
             switch response.result {
-            case .success: break
+            case .success: completion()
             case .failure: break
             }
         }
