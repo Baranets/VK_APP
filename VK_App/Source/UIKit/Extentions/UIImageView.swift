@@ -12,8 +12,8 @@ extension UIImageView {
         let urlRequest = URLRequest(url: fromURL)
         
         if let imageFromCache = imageCache?.image(for: urlRequest) {
-                self.image = key == fromURL ? imageFromCache : nil
-                return
+            self.image = key == fromURL ? imageFromCache : nil
+            return
         }
         
         Alamofire.request(fromURL).responseImage { (response) in

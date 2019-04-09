@@ -1,5 +1,6 @@
 
 import UIKit
+import SwiftKeychainWrapper
 
 class ViewController: UIViewController {
 
@@ -18,7 +19,7 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
         
-        if let userToken = UserDefaults.standard.string(forKey: "userToken") {
+        if let userToken = KeychainWrapper.standard.string(forKey: "userToken") {
             VK_API.globalToken = userToken
             let friendView = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
             self.navigationController?.pushViewController(friendView, animated: false)

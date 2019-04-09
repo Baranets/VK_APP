@@ -1,6 +1,7 @@
 
 import UIKit
 import AlamofireImage
+import RealmSwift
 
 class FriendsViewController: UITableViewController {
 
@@ -15,17 +16,21 @@ class FriendsViewController: UITableViewController {
         memoryCapacity: 48 * 1024 * 1024,
         preferredMemoryUsageAfterPurge: 32 * 1024 * 1024
     )
-    var users = [User]()
+    
+    var realm = try! Realm()
+    var users: Results<User>?
   
     //MARK: - View Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshcontrol.tintColor = UIColor.white
+        users = self.realm.objects(User.self).sorted(byKeyPath: "lastName", ascending: true)
+
+        refreshcontrol.tintColor = UIColor.black
         refreshcontrol.addTarget(self, action: #selector(FriendsViewController.loadData), for: UIControl.Event.valueChanged)
         tableview.refreshControl = self.refreshcontrol
- 
+        
         loadData()
     }
 
@@ -38,7 +43,7 @@ class FriendsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return users?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,7 +54,7 @@ class FriendsViewController: UITableViewController {
             guard let imageFriend: UIImageView = cell.viewWithTag(2) as? UIImageView else { return cell }
             guard let onlineFriendLabel: UILabel = cell.viewWithTag(3) as? UILabel     else { return cell }
             
-            let user = users[indexPath.row]
+            guard let user = users?[indexPath.row] else { return cell }
             nameFriendLabel.text = user.fullName
             onlineFriendLabel.text = (user.isOnline) ? "online" : "offline"
             onlineFriendLabel.textColor = (user.isOnline) ? UIColor.green : UIColor.gray
@@ -62,19 +67,42 @@ class FriendsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            users.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            guard let userForDelete = users?[indexPath.row] else { return }
+            do {
+                try realm.write {
+                    realm.delete(userForDelete)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            } catch (let error) {
+                print(error)
+            }
         }
     }
 
 
     @objc private func loadData() {
         VK_User().getUserFriendList(user_id: nil, completion: ({[weak self] users in
-            self?.users = users
-            self?.users.sort(by: { $0.lastName < $1.lastName })
-            self?.tableview.reloadData()
-            self?.tableview.refreshControl?.endRefreshing()
+            self?.writeData(users: users) {
+                self?.tableview.reloadData()
+                self?.tableview.refreshControl?.endRefreshing()
+            }
         }))
+    }
+    
+    private func writeData(users: [User]?, completion: @escaping(() -> Void)) {
+        do {
+            guard let users = users else {
+                completion()
+                return
+            }
+            try self.realm.write {
+                realm.add(users, update: true)
+                completion()
+            }
+        } catch(let error) {
+            print(error)
+            return
+        }
     }
     // MARK: - Navigation
 
@@ -86,7 +114,7 @@ class FriendsViewController: UITableViewController {
         guard let indexPath = tableview.indexPathForSelectedRow else { return }
         if(segue.identifier == "toStory") {
             let datailVC = segue.destination as! ImagesFriendViewController
-            datailVC.user = users[indexPath.row]
+            datailVC.user = users?[indexPath.row]
         }
         tableview.deselectRow(at: indexPath, animated: true)
     }

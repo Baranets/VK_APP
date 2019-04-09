@@ -1,4 +1,5 @@
 import UIKit
+import SwiftKeychainWrapper
 import WebKit
 
 class WebViewController: UIViewController{
@@ -39,7 +40,7 @@ extension WebViewController: WKNavigationDelegate {
         guard let token = VK_API().getToken(fragment: fragment) else {
             return
         }
-        UserDefaults.standard.set(token, forKey: "userToken")
+        KeychainWrapper.standard.set(token, forKey: "userToken")
         performSegue(withIdentifier: "logined", sender: nil)
         decisionHandler(.cancel)
     }

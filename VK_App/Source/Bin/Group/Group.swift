@@ -24,11 +24,14 @@ class Group: Object, Entity {
     
     convenience init(json: JSON) {
         self.init()
-        
         self.id            = json["id"].intValue
         self.name          = json["name"].stringValue
         self.urlPhotoString = json["photo_50"].stringValue
         self.largePhotoURL = URL(string: json["photo_200"].stringValue)
+    }
+    
+    override static func primaryKey() -> String {
+        return "id"
     }
     
 }

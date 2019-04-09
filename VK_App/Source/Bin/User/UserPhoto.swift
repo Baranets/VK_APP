@@ -15,11 +15,9 @@ class UserPhoto: Object {
     @objc dynamic var urlString: String = ""
     
     //MARK: - Inits
-    
     convenience init(json: JSON) {
         self.init()
-        
-        self.id   = json["id"].intValue
+        self.id         = json["id"].intValue
         self.urlString  = json["sizes"][0]["url"].stringValue
     }
     

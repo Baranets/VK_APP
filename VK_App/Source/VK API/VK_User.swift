@@ -6,7 +6,7 @@ import Alamofire
 class VK_User: VK_API {
     
     ///[EN]Return list of the Friends of the User. If the user_id == nil return list of the Friends of the Logined User /[RU]Возвращает список друзей пользователя. В случае если user_id == nil возвращается список друзей залогинненого пользователя
-    func getUserFriendList(user_id: String?, completion: @escaping ([User]) -> Void) {
+    func getUserFriendList(user_id: String?, completion: @escaping ([User]?) -> Void) {
         
         //[EN]Create a URL request /[RU]Формируем URL запрос
         var urlComponents = URLComponents()
@@ -35,6 +35,7 @@ class VK_User: VK_API {
                     return
                 }
             case .failure(_):
+                completion(nil)
                 return
             }
         }

@@ -12,9 +12,7 @@ class User: Object, Human {
     @objc dynamic var name: String = ""
     @objc dynamic var lastName: String = ""
     @objc dynamic var urlPhotoString: String? = ""
-        
-    ///[EN] Bool variable to check is User Online  /[RU] Bool переменная для проверки онлайн ли пользователь
-    var isOnline: Bool = false
+    @objc dynamic var isOnline: Bool = false
     
     //MARK: - Functions
     
@@ -28,6 +26,15 @@ class User: Object, Human {
         self.lastName = json["last_name"].stringValue
         self.isOnline = json["online"].boolValue
         self.urlPhotoString = json["photo"].stringValue
-
+    }
+    
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id && lhs.isOnline == rhs.isOnline && lhs.lastName == rhs.lastName && lhs.name == rhs.name && lhs.urlPhotoString == rhs.urlPhotoString
     }
 }

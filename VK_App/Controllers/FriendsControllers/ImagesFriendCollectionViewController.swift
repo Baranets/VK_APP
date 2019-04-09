@@ -15,8 +15,8 @@ class ImagesFriendViewController: UICollectionViewController {
     var user: User?
     var userImages = [UserPhoto]()
     let imageCache = AutoPurgingImageCache(
-        memoryCapacity: 48 * 1024 * 1024,
-        preferredMemoryUsageAfterPurge: 32 * 1024 * 1024
+        memoryCapacity: 16 * 1024 * 1024,
+        preferredMemoryUsageAfterPurge: 8 * 1024 * 1024
     )
     
     //MARK: - View Functions
