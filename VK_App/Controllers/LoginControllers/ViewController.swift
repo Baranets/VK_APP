@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         if let userToken = UserDefaults.standard.string(forKey: "userToken") {
             VK_API.globalToken = userToken
             let friendView = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-            self.navigationController?.pushViewController(friendView, animated: true)
+            self.navigationController?.pushViewController(friendView, animated: false)
         }
         
     }
@@ -49,12 +49,14 @@ class ViewController: UIViewController {
     */
         
         let userDefualts = UserDefaults.standard
+
         guard let userToken = userDefualts.string(forKey: "userToken") else {
-            performSegue(withIdentifier: "logined", sender: nil)
+            performSegue(withIdentifier: "loginScreen", sender: nil)
             return
         }
         
         VK_API.globalToken = userToken
+
         performSegue(withIdentifier: "loginDone", sender: nil)
     }
 

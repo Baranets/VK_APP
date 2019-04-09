@@ -25,14 +25,16 @@ class VK_User: VK_API {
         
         //[EN]Treatment of the JSON /[RU]Обработка JSON
         Alamofire.request(urlComponents.url!).responseData { response in
-            guard let data = response.value else {
-                return
-            }
-            do {
-                let json = try JSON(data: data)
-                let users = json["response"]["items"].compactMap { User(json: $0.1) }
-                completion(users)
-            } catch {
+            switch response.result {
+            case .success(let data):
+                do {
+                    let json = try JSON(data: data)                    
+                    let users = json["response"]["items"].compactMap { User(json: $0.1) }
+                    completion(users)
+                } catch {
+                    return
+                }
+            case .failure(_):
                 return
             }
         }

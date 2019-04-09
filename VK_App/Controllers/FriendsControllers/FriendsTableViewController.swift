@@ -1,5 +1,6 @@
 
 import UIKit
+import AlamofireImage
 
 class FriendsViewController: UITableViewController {
 
@@ -10,7 +11,10 @@ class FriendsViewController: UITableViewController {
     //MARK: - Variables
     
     let refreshcontrol = UIRefreshControl()
-    let imageCache = NSCache<AnyObject, AnyObject>()
+    let imageCache = AutoPurgingImageCache(
+        memoryCapacity: 48 * 1024 * 1024,
+        preferredMemoryUsageAfterPurge: 32 * 1024 * 1024
+    )
     var users = [User]()
   
     //MARK: - View Functions
@@ -18,11 +22,11 @@ class FriendsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshcontrol.addTarget(self, action: #selector(FriendsViewController.refreshData), for: UIControl.Event.valueChanged)
-        
+        refreshcontrol.tintColor = UIColor.white
+        refreshcontrol.addTarget(self, action: #selector(FriendsViewController.loadData), for: UIControl.Event.valueChanged)
         tableview.refreshControl = self.refreshcontrol
  
-        downloadItems()
+        loadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,9 +53,8 @@ class FriendsViewController: UITableViewController {
             nameFriendLabel.text = user.fullName
             onlineFriendLabel.text = (user.isOnline) ? "online" : "offline"
             onlineFriendLabel.textColor = (user.isOnline) ? UIColor.green : UIColor.gray
-            guard let url = user.photoURL else { return cell }
+            guard let url = URL(string: user.urlPhotoString ?? "") else { return cell }
             imageFriend.downloadPhoto(fromURL: url, imageCache: imageCache)
-            user.photo = imageFriend.image
         }
 
         return cell
@@ -63,13 +66,9 @@ class FriendsViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
-    @objc func refreshData() {
-        users.removeAll()
-        downloadItems()
-    }
 
-    private func downloadItems() {
+
+    @objc private func loadData() {
         VK_User().getUserFriendList(user_id: nil, completion: ({[weak self] users in
             self?.users = users
             self?.users.sort(by: { $0.lastName < $1.lastName })

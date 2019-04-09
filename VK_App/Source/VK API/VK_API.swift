@@ -9,7 +9,7 @@ class VK_API {
     static var globalToken: String?
     
     ///[EN]Variable store version of the API /[RU]Переменная хранит версию API
-    let version = "5.87"
+    let version = "5.92"
     
     ///[EN]Function returns URL request with authorization page /[RU]Функция возвращает URL запрос с отображением страницы аунтификации
     func requestLoginView() -> URLRequest {
@@ -23,12 +23,31 @@ class VK_API {
             URLQueryItem(name: "client_id", value: "6695930"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "scope", value: "262150"),
+            URLQueryItem(name: "scope", value: "327686"),
             URLQueryItem(name: "response_type", value: "token"),
             URLQueryItem(name: "v", value: version)
         ]
         
         return URLRequest(url: urlComponents.url!)
+    }
+    
+    func requestLogout() {
+        
+        var urlComponents = URLComponents()
+
+        urlComponents.scheme = "https"
+        urlComponents.host   = "oauth.vk.com"
+        urlComponents.path   = "/logout"
+        
+        Alamofire.request(urlComponents.url!).responseData(completionHandler: { response in
+            switch response.result {
+            case .success:
+                VK_API.globalToken = nil
+                print(response)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     ///[EN]Return token of the user /[RU] Возвращает токен пользователя
@@ -42,7 +61,7 @@ class VK_API {
         }
         let token = params["access_token"]
         VK_API.globalToken = token
-        
+
         return token
     }
     

@@ -1,5 +1,6 @@
 
 import UIKit
+import AlamofireImage
 
 private let reuseIdentifier = "Cell"
 
@@ -13,7 +14,10 @@ class ImagesFriendViewController: UICollectionViewController {
 
     var user: User?
     var userImages = [UserPhoto]()
-    var photoCache = NSCache<AnyObject, AnyObject>()
+    let imageCache = AutoPurgingImageCache(
+        memoryCapacity: 48 * 1024 * 1024,
+        preferredMemoryUsageAfterPurge: 32 * 1024 * 1024
+    )
     
     //MARK: - View Functions
     
@@ -48,14 +52,12 @@ class ImagesFriendViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionUS", for: indexPath)
     
         guard let imageUsers = cell.viewWithTag(1) as? UIImageView else { return cell }
+
+        let userPhoto = userImages[indexPath.row]
         
-        let userImage = userImages[indexPath.row]
+        guard let url = URL(string: userPhoto.urlString) else { return cell }
+        imageUsers.downloadPhoto(fromURL: url, imageCache: imageCache)
         
-        if let imageFromCache = photoCache.object(forKey: userImage.url as AnyObject) as? UIImage {
-            imageUsers.image = imageFromCache
-        } else {
-            imageUsers.downloadPhoto(fromURL: userImage.url, imageCache: photoCache)
-        }
     
         return cell
     }

@@ -1,26 +1,33 @@
 import UIKit
+import AlamofireImage
 
 class GroupsWorldViewController: UITableViewController {
 
     //MARK: - UI Objects
 
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var tableview: UITableView!
+    let searchController = UISearchController(searchResultsController: nil)
     
     //MARK: - Variables
     
     ///[EN]Array with filtered list of groups /[RU]Массив с отфильтрованным списком групп
     var filteredGroups = [Group]()
     
-    ///[EN]Cache for Photos /[RU]Кэш для фотографий
-    var photoCache = NSCache<AnyObject, AnyObject>()
-    
     //MARK: - View Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        self.navigationItem.hidesSearchBarWhenScrolling   = false
+        self.navigationItem.searchController = searchController
+        
+        searchController.searchBar.delegate = self
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchController.dismiss(animated: false, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,11 +70,8 @@ class GroupsWorldViewController: UITableViewController {
         let group = filteredGroups[indexPath.row]
         groupNameLabel.text = group.name
         
-        if let imageFromCache = photoCache.object(forKey: group.photoURL as AnyObject) as? UIImage {
-            groupImage.image = imageFromCache
-        } else {
-            groupImage.downloadPhoto(fromURL: group.photoURL, imageCache: photoCache)
-        }
+        guard let url = URL(string: group.urlPhotoString ?? "") else { return cell }
+        groupImage.downloadPhoto(fromURL: url, imageCache: nil)
         
         return cell
     }

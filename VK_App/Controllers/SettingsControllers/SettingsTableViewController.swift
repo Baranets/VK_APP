@@ -17,10 +17,10 @@ class SettingsTableViewController: UITableViewController {
     }
     
     @IBAction func logoutAction(_ sender: UIBarButtonItem) {
+//        VK_API().requestLogout()
         UserDefaults.standard.removeObject(forKey: "userToken")
         let friendView = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-        self.navigationController?.pushViewController(friendView, animated: false)
-        
+        self.navigationController?.pushViewController(friendView, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

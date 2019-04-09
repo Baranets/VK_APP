@@ -39,8 +39,7 @@ extension WebViewController: WKNavigationDelegate {
         guard let token = VK_API().getToken(fragment: fragment) else {
             return
         }
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(token, forKey: "userToken")
+        UserDefaults.standard.set(token, forKey: "userToken")
         performSegue(withIdentifier: "logined", sender: nil)
         decisionHandler(.cancel)
     }

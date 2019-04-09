@@ -1,11 +1,13 @@
 import UIKit
+import AlamofireImage
 
 class GroupsViewController: UITableViewController {
     
     //MARK: - UI Objects
     
     @IBOutlet var tableview: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    let searchBarController = UISearchController(searchResultsController: nil)
+    let searchBar = UISearchBar()
     
     //MARK: - Variables
     
@@ -15,7 +17,11 @@ class GroupsViewController: UITableViewController {
     var filteredGroups = [Group]()
     
     ///[EN]Cache for Photos /[RU]Кэш для фотографий
-    var photoCache = NSCache<AnyObject, AnyObject>()
+    let imageCache = AutoPurgingImageCache(
+        memoryCapacity: 48 * 1024 * 1024,
+        preferredMemoryUsageAfterPurge: 32 * 1024 * 1024
+    )
+    
     let refreshcontrol = UIRefreshControl()
     
     //MARK: - View Functions
@@ -28,7 +34,21 @@ class GroupsViewController: UITableViewController {
         refreshcontrol.addTarget(self, action: #selector (GroupsViewController.refreshData), for: UIControl.Event.valueChanged)
         
         tableview.refreshControl = self.refreshcontrol
-        searchBar.delegate = self
+        
+        searchBarController.hidesNavigationBarDuringPresentation = false
+        searchBarController.dimsBackgroundDuringPresentation = false
+        
+        self.navigationItem.searchController = searchBarController
+        self.navigationItem.hidesSearchBarWhenScrolling = true
+        searchBarController.searchBar.delegate = self
+
+//        navigationItem.titleView = searchBar
+//        searchBar.delegate = self
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchBarController.dismiss(animated: false, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,11 +76,9 @@ class GroupsViewController: UITableViewController {
             
             groupNameLabel.text = group.name
             
-            if let imageFromCache = photoCache.object(forKey: group.photoURL as AnyObject) as? UIImage {
-                groupImage.image = imageFromCache
-            } else {
-                groupImage.downloadPhoto(fromURL: group.photoURL, imageCache: photoCache)
-            }
+            guard let url = URL(string: group.urlPhotoString ?? "") else { return cell }
+    
+            groupImage.downloadPhoto(fromURL: url, imageCache: imageCache)
         }
         
         return cell
@@ -80,7 +98,7 @@ class GroupsViewController: UITableViewController {
             DispatchQueue.global().async {
                 VK_Group().leaveGroup(byGroupID: groupID)
                 DispatchQueue.main.async {
-                    self.searchBar.text = ""
+                    self.searchBarController.searchBar.text = ""
                     self.refreshData()
                 }
             }

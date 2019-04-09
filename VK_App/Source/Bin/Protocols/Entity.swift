@@ -10,6 +10,6 @@ protocol Entity {
     var name:  String  { get }
     
     ///[EN] Image(UIImage) of Entity /[RU] Изображение объекта
-    var photo: UIImage? { get }
+    var urlPhotoString: String? { get }
     
 }
