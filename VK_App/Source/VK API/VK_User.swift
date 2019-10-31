@@ -8,12 +8,13 @@ class VK_User: VK_API {
     ///[EN]Return list of the Friends of the User. If the user_id == nil return list of the Friends of the Logined User /[RU]Возвращает список друзей пользователя. В случае если user_id == nil возвращается список друзей залогинненого пользователя
     func getUserFriendList(user_id: String?, completion: @escaping ([User]?) -> Void) {
         
-        //[EN]Create a URL request /[RU]Формируем URL запрос
+        //[EN]Create a URL request /[RU]Формируем URL запрос        
         var urlComponents = URLComponents()
         
         urlComponents.scheme = "https"
         urlComponents.host   = "api.vk.com"
         urlComponents.path   = "/method/friends.get"
+        
         
         urlComponents.queryItems = [
             //[EN]Optionaly user id, probability to get friends of the user /[RU]Опциональное ИД пользователся, для возможности получения списка друзей пользователя

@@ -14,7 +14,6 @@
 		50D70DCC219DB70B003F9529 /* VK_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D70DCB219DB70B003F9529 /* VK_User.swift */; };
 		50D70DCE219DB7F2003F9529 /* VK_Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D70DCD219DB7F2003F9529 /* VK_Group.swift */; };
 		50E05FE221514B3B0077161D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50E05FE121514B390077161D /* Assets.xcassets */; };
-		50F2B0B121A1F91D0031552B /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2B0B021A1F91D0031552B /* TabBarController.swift */; };
 		50F59C18219651D50030EA4C /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F59C17219651D50030EA4C /* Entity.swift */; };
 		9435CF85212D7FC7002689E7 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9435CF84212D7FC7002689E7 /* AlertBuilder.swift */; };
 		943A5DD021314E4D00D5F27C /* Human.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943A5DCF21314E4D00D5F27C /* Human.swift */; };
@@ -40,7 +39,6 @@
 		50D70DCB219DB70B003F9529 /* VK_User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VK_User.swift; sourceTree = "<group>"; };
 		50D70DCD219DB7F2003F9529 /* VK_Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VK_Group.swift; sourceTree = "<group>"; };
 		50E05FE121514B390077161D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		50F2B0B021A1F91D0031552B /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		50F59C17219651D50030EA4C /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		64D3E27EF30EB773AB63EF4B /* Pods-VK_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VK_App/Pods-VK_App.debug.xcconfig"; sourceTree = "<group>"; };
 		710D4125137E0F8DA256F06F /* Pods-VK_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_App.release.xcconfig"; path = "Pods/Target Support Files/Pods-VK_App/Pods-VK_App.release.xcconfig"; sourceTree = "<group>"; };
@@ -74,39 +72,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		50293FF8225CCA590088373C /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-				50BA58BE219B5E3E00982E3F /* Extentions */,
-			);
-			path = UIKit;
-			sourceTree = "<group>";
-		};
-		508EE14A21A23B44004AF2AF /* SettingsControllers */ = {
-			isa = PBXGroup;
-			children = (
-				508EE14C21A23B6E004AF2AF /* SettingsTableViewController.swift */,
-			);
-			path = SettingsControllers;
-			sourceTree = "<group>";
-		};
-		50BA58BE219B5E3E00982E3F /* Extentions */ = {
-			isa = PBXGroup;
-			children = (
-				50BA58BF219B654500982E3F /* UIImageView.swift */,
-			);
-			path = Extentions;
-			sourceTree = "<group>";
-		};
-		50BA58C1219C8D7C00982E3F /* User */ = {
-			isa = PBXGroup;
-			children = (
-				943A5DD32131581C00D5F27C /* User.swift */,
-				943A5DD5213198A600D5F27C /* UserPhoto.swift */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
 		50BA58C2219C8D8700982E3F /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +79,221 @@
 				943A5DCF21314E4D00D5F27C /* Human.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		50D383A3236AC4B80054DCF6 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				50D383A6236AC4DC0054DCF6 /* Model */,
+				50D383A5236AC4D90054DCF6 /* View */,
+				50D383A4236AC4D30054DCF6 /* Controller */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		50D383A4236AC4D30054DCF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				947EA06C212D2A2100490D35 /* FriendsTableViewController.swift */,
+				94EA34B7213088D600EE22E1 /* ImagesFriendCollectionViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		50D383A5236AC4D90054DCF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50D383A6236AC4DC0054DCF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50D383A7236AC4EC0054DCF6 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				50D383AA236AC4F80054DCF6 /* Model */,
+				50D383A9236AC4F40054DCF6 /* View */,
+				50D383A8236AC4F00054DCF6 /* Controller */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		50D383A8236AC4F00054DCF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		50D383A9236AC4F40054DCF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50D383AA236AC4F80054DCF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				50BA58C2219C8D8700982E3F /* Protocols */,
+				943A5DD32131581C00D5F27C /* User.swift */,
+				943A5DD5213198A600D5F27C /* UserPhoto.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50D383AB236AC52A0054DCF6 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				50D383AE236AC53A0054DCF6 /* Model */,
+				50D383AD236AC5370054DCF6 /* View */,
+				50D383AC236AC5340054DCF6 /* Controller */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
+		50D383AC236AC5340054DCF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				947EA06E212D502000490D35 /* GroupsTableViewController.swift */,
+				94F0D61D2131EC620063ECFE /* GroupsWorldTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		50D383AD236AC5370054DCF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50D383AE236AC53A0054DCF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				94E4341B2131DDB200FC890B /* Group.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50D383AF236AC58C0054DCF6 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				50D383B3236AC5A00054DCF6 /* Model */,
+				50D383B2236AC59E0054DCF6 /* View */,
+				50D383B1236AC5990054DCF6 /* Controller */,
+				50D383B0236AC58F0054DCF6 /* Manager */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		50D383B0236AC58F0054DCF6 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		50D383B1236AC5990054DCF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		50D383B2236AC59E0054DCF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9471E3582128F86300730643 /* LaunchScreen.storyboard */,
+				9471E3532128F86200730643 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50D383B3236AC5A00054DCF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50D383B4236AC5DD0054DCF6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				50D383B7236AC5F80054DCF6 /* Model */,
+				50D383B6236AC5F40054DCF6 /* View */,
+				50D383B5236AC5EF0054DCF6 /* Controller */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		50D383B5236AC5EF0054DCF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				508EE14C21A23B6E004AF2AF /* SettingsTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		50D383B6236AC5F40054DCF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50D383B7236AC5F80054DCF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50D383B8236AC6070054DCF6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				50D383BB236AC6100054DCF6 /* Model */,
+				50D383BA236AC60D0054DCF6 /* View */,
+				50D383B9236AC6090054DCF6 /* Controller */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		50D383B9236AC6090054DCF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9471E3512128F86200730643 /* ViewController.swift */,
+				5043DB6D215063D3007B4E4A /* WebViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		50D383BA236AC60D0054DCF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50D383BB236AC6100054DCF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50D383BE236AC6490054DCF6 /* UIKit+Extention */ = {
+			isa = PBXGroup;
+			children = (
+				50BA58BF219B654500982E3F /* UIImageView.swift */,
+			);
+			path = "UIKit+Extention";
 			sourceTree = "<group>";
 		};
 		50D70DCA219DB602003F9529 /* VK API */ = {
@@ -126,61 +306,11 @@
 			path = "VK API";
 			sourceTree = "<group>";
 		};
-		50F2B0AF21A1F20A0031552B /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				508EE14A21A23B44004AF2AF /* SettingsControllers */,
-				50F59C13219650FE0030EA4C /* FriendsControllers */,
-				50F59C14219651250030EA4C /* GroupsControllers */,
-				50F59C15219651A80030EA4C /* LoginControllers */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		50F59C13219650FE0030EA4C /* FriendsControllers */ = {
-			isa = PBXGroup;
-			children = (
-				947EA06C212D2A2100490D35 /* FriendsTableViewController.swift */,
-				94EA34B7213088D600EE22E1 /* ImagesFriendCollectionViewController.swift */,
-			);
-			path = FriendsControllers;
-			sourceTree = "<group>";
-		};
-		50F59C14219651250030EA4C /* GroupsControllers */ = {
-			isa = PBXGroup;
-			children = (
-				947EA06E212D502000490D35 /* GroupsTableViewController.swift */,
-				94F0D61D2131EC620063ECFE /* GroupsWorldTableViewController.swift */,
-			);
-			path = GroupsControllers;
-			sourceTree = "<group>";
-		};
-		50F59C15219651A80030EA4C /* LoginControllers */ = {
-			isa = PBXGroup;
-			children = (
-				50F2B0B021A1F91D0031552B /* TabBarController.swift */,
-				9471E3512128F86200730643 /* ViewController.swift */,
-				5043DB6D215063D3007B4E4A /* WebViewController.swift */,
-			);
-			path = LoginControllers;
-			sourceTree = "<group>";
-		};
-		50F59C16219651C40030EA4C /* Bin */ = {
-			isa = PBXGroup;
-			children = (
-				50BA58C2219C8D8700982E3F /* Protocols */,
-				50BA58C1219C8D7C00982E3F /* User */,
-				94E434182131DD3500FC890B /* Group */,
-			);
-			path = Bin;
-			sourceTree = "<group>";
-		};
 		9435CF7F212D72C1002689E7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				50293FF8225CCA590088373C /* UIKit */,
+				50D383BE236AC6490054DCF6 /* UIKit+Extention */,
 				50D70DCA219DB602003F9529 /* VK API */,
-				50F59C16219651C40030EA4C /* Bin */,
 				943A5DCD21314E1900D5F27C /* Alert */,
 			);
 			path = Source;
@@ -215,23 +345,18 @@
 		9471E34E2128F86200730643 /* VK_App */ = {
 			isa = PBXGroup;
 			children = (
-				50E05FE121514B390077161D /* Assets.xcassets */,
 				9471E35B2128F86300730643 /* Info.plist */,
 				9471E34F2128F86200730643 /* AppDelegate.swift */,
+				50E05FE121514B390077161D /* Assets.xcassets */,
+				50D383B8236AC6070054DCF6 /* Auth */,
+				50D383AF236AC58C0054DCF6 /* Global */,
+				50D383A3236AC4B80054DCF6 /* Friends */,
+				50D383AB236AC52A0054DCF6 /* Groups */,
+				50D383A7236AC4EC0054DCF6 /* User */,
+				50D383B4236AC5DD0054DCF6 /* Settings */,
 				9435CF7F212D72C1002689E7 /* Source */,
-				50F2B0AF21A1F20A0031552B /* Controllers */,
-				9471E3532128F86200730643 /* Main.storyboard */,
-				9471E3582128F86300730643 /* LaunchScreen.storyboard */,
 			);
 			path = VK_App;
-			sourceTree = "<group>";
-		};
-		94E434182131DD3500FC890B /* Group */ = {
-			isa = PBXGroup;
-			children = (
-				94E4341B2131DDB200FC890B /* Group.swift */,
-			);
-			path = Group;
 			sourceTree = "<group>";
 		};
 		BFBA524919930E182CB8A094 /* Frameworks */ = {
@@ -326,23 +451,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VK_App/Pods-VK_App-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VK_App/Pods-VK_App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VK_App/Pods-VK_App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -377,7 +491,6 @@
 				50D70DCE219DB7F2003F9529 /* VK_Group.swift in Sources */,
 				943A5DD6213198A600D5F27C /* UserPhoto.swift in Sources */,
 				5043DB7121506FCB007B4E4A /* VK_API.swift in Sources */,
-				50F2B0B121A1F91D0031552B /* TabBarController.swift in Sources */,
 				9471E3522128F86200730643 /* ViewController.swift in Sources */,
 				947EA06D212D2A2100490D35 /* FriendsTableViewController.swift in Sources */,
 				9471E3502128F86200730643 /* AppDelegate.swift in Sources */,
@@ -541,7 +654,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LUGU79P6AZ;
 				INFOPLIST_FILE = VK_App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -563,7 +676,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LUGU79P6AZ;
 				INFOPLIST_FILE = VK_App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
