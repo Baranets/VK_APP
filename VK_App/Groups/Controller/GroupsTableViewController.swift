@@ -5,56 +5,67 @@ import AlamofireImage
 class GroupsViewController: UITableViewController {
     
     //MARK: - UI Objects
-    
-    @IBOutlet var tableview: UITableView!
     let searchBarController = UISearchController(searchResultsController: nil)
-    let searchBar = UISearchBar()
     
     let realm = try! Realm()
     var groups: Results<Group>?
-    
-//    ///[EN]Array with full list of groups of the user /[RU]Массив с полным списком групп пользователя
-//    var groups         = [Group]()
-//    ///[EN]Array with filtered list of groups /[RU]Массив с отфильтрованным списком групп
-//    var filteredGroups = [Group]()
-    
-    ///[EN]Cache for Photos /[RU]Кэш для фотографий
-    let imageCache = AutoPurgingImageCache(
-        memoryCapacity: 16 * 1024 * 1024,
-        preferredMemoryUsageAfterPurge: 8 * 1024 * 1024
-    )
-    
-    let refreshcontrol = UIRefreshControl()
-    
-    //MARK: - View Functions
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var notificationToken: NotificationToken?
         
-        self.groups = loadRealmData()
-   
-        refreshcontrol.addTarget(self, action: #selector (GroupsViewController.loadData), for: UIControl.Event.valueChanged)
-        
-        tableview.refreshControl = self.refreshcontrol
-        
-        searchBarController.hidesNavigationBarDuringPresentation = false
-        searchBarController.dimsBackgroundDuringPresentation = false
-        
-        self.navigationItem.searchController = searchBarController
-        self.navigationItem.hidesSearchBarWhenScrolling = true
-        searchBarController.searchBar.delegate = self
-        
-        loadData()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchBarController.dismiss(animated: false, completion: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    //MARK: - View Functions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.estimatedRowHeight = 100
+        tableView.register(UINib(nibName: GroupTableViewCell.cellIdentifire, bundle: nil), forCellReuseIdentifier: GroupTableViewCell.cellIdentifire)
+        
+        let refreshcontrol = UIRefreshControl()
+        refreshcontrol.addTarget(self, action: #selector (GroupsViewController.loadData), for: UIControl.Event.valueChanged)
+        tableView.refreshControl = refreshcontrol
+        
+        self.navigationItem.searchController = searchBarController
+        searchBarController.searchBar.delegate = self
+        searchBarController.dimsBackgroundDuringPresentation = false
+        
+        configureRealm()
+        
+        loadData()
     }
+    
+    deinit {
+        notificationToken?.invalidate()
+        realm.invalidate()
+    }
+    
+    private func configureRealm() {
+        groups = loadRealmData()
+
+        notificationToken = groups?.observe { [weak self] (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                self?.tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                self?.tableView.beginUpdates()
+                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                        with: .automatic)
+                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                        with: .none)
+                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                        with: .none)
+                self?.tableView.endUpdates()
+                
+            case .error(let error):
+                print(error)
+            }
+            self?.tableView.refreshControl?.endRefreshing()
+
+        }
+    }
+
 
     // MARK: - Table view data source
 
@@ -67,20 +78,9 @@ class GroupsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userGroups", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCell.cellIdentifire) as! GroupTableViewCell
         
-        if !self.tableview.refreshControl!.isRefreshing {
-            guard let groupNameLabel: UILabel = cell.viewWithTag(1) as? UILabel     else { return cell}
-            guard let groupImage: UIImageView = cell.viewWithTag(2) as? UIImageView else { return cell}
-            
-            guard let group = groups?[indexPath.row] else { return cell }
-            
-            groupNameLabel.text = group.name
-            
-            guard let url = URL(string: group.urlPhotoString ?? "") else { return cell }
-    
-            groupImage.downloadImage(fromURL: url, imageCache: imageCache)
-        }
+        cell.group = groups?[indexPath.row]
         
         return cell
     }
@@ -90,10 +90,9 @@ class GroupsViewController: UITableViewController {
         UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let group = self.groups?[indexPath.row] else { return }
-            VK_Group().leaveGroup(byGroupID: group.id) { [weak self] in
+            VKGroup().leave(groupId: group.id) { [weak self] in
                 try! self?.realm.write {
                     self?.realm.delete(group)
-                    self?.tableview.deleteRows(at: [indexPath], with: .fade)
                 }
             }
   
@@ -107,21 +106,13 @@ class GroupsViewController: UITableViewController {
     }
     
     @objc private func loadData() {
-        VK_Group().getUserGroups(user_id: nil, completion: {[weak self] groups in
-            self?.writeData(groups: groups) {
-                self?.tableview.reloadData()
-                self?.tableview.refreshControl?.endRefreshing()
+        VKGroup().get(userId: nil, completion: {[weak self] groups in
+            try! self?.realm.write {
+                self?.realm.add(groups, update: .all)
             }
         })
     }
     
-    
-    private func writeData(groups: [Group], completion: @escaping(() -> Void)) {
-        try! realm.write {
-            realm.add(groups, update: .modified)
-            completion()
-        }
-    }
     
     private func loadRealmData() -> Results<Group>  {
         return realm.objects(Group.self).sorted(byKeyPath: "name", ascending: true)
@@ -135,18 +126,18 @@ extension GroupsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty, let text = searchBar.text else {
-            groups = self.loadRealmData()
-            tableview.reloadData()
+            groups = loadRealmData()
+            tableView.reloadData()
             return
         }
         
-        groups = self.loadRealmData().filter("name contains '\(text )'")
-        tableview.reloadData()
+        groups = loadRealmData().filter("name contains '\(text)'")
+        tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        groups = self.loadRealmData()
-        tableview.reloadData()
+        groups = loadRealmData()
+        tableView.reloadData()
     }
     
 

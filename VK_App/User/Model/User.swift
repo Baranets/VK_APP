@@ -14,8 +14,7 @@ class User: Object, Human {
     @objc dynamic var urlPhotoString: String? = ""
     @objc dynamic var isOnline: Bool = false
     
-    //MARK: - Functions
-    
+
     //MARK: - Inits
     
     convenience init(json: JSON) {
@@ -28,11 +27,14 @@ class User: Object, Human {
         self.urlPhotoString = json["photo"].stringValue
     }
     
-    
+    //MARK: - Functions
     override static func primaryKey() -> String? {
         return "id"
     }
     
+    override class func indexedProperties() -> [String] {
+        return ["id"]
+    }
     
     static func == (lhs: User, rhs: User) -> Bool {
         return lhs.id == rhs.id && lhs.isOnline == rhs.isOnline && lhs.lastName == rhs.lastName && lhs.name == rhs.name && lhs.urlPhotoString == rhs.urlPhotoString

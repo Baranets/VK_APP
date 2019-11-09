@@ -1,17 +1,10 @@
-
 import UIKit
 import AlamofireImage
 import RealmSwift
 
 class FriendsViewController: UITableViewController {
 
-    //MARK: - UI Objects
-    
-    @IBOutlet var tableview: UITableView!
-    
     //MARK: - Variables
-    
-    let refreshcontrol = UIRefreshControl()
     let imageCache = AutoPurgingImageCache(
         memoryCapacity: 48 * 1024 * 1024,
         preferredMemoryUsageAfterPurge: 32 * 1024 * 1024
@@ -19,25 +12,55 @@ class FriendsViewController: UITableViewController {
     
     var realm = try! Realm()
     var users: Results<User>?
+    var notificationToken: NotificationToken?
   
     //MARK: - View Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        users = self.realm.objects(User.self).sorted(byKeyPath: "lastName", ascending: true)
+        tableView.register(UINib(nibName: FriendTableViewCell.cellIdentifier, bundle: nil), forCellReuseIdentifier: FriendTableViewCell.cellIdentifier)
+        tableView.estimatedRowHeight = 600
 
-        refreshcontrol.tintColor = UIColor.black
+        let refreshcontrol = UIRefreshControl()
         refreshcontrol.addTarget(self, action: #selector(FriendsViewController.loadData), for: UIControl.Event.valueChanged)
-        tableview.refreshControl = self.refreshcontrol
+        tableView.refreshControl = refreshcontrol
+        
+        configureRealm()
         
         loadData()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    deinit {
+        notificationToken?.invalidate()
+        realm.invalidate()
     }
-  
+    
+    private func configureRealm() {
+        users = self.realm.objects(User.self).sorted(byKeyPath: "lastName", ascending: true)
+
+        notificationToken = users?.observe { [weak self] (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                self?.tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                self?.tableView.beginUpdates()
+                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                        with: .automatic)
+                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                        with: .none)
+                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                        with: .none)
+                self?.tableView.endUpdates()
+                
+            case .error(let error):
+                print(error)
+            }
+            self?.tableView.refreshControl?.endRefreshing()
+
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -47,21 +70,11 @@ class FriendsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellUS", for: indexPath)
-        
-        if !self.tableview.refreshControl!.isRefreshing {
-            guard let nameFriendLabel: UILabel = cell.viewWithTag(1) as? UILabel     else { return cell }
-            guard let imageFriend: UIImageView = cell.viewWithTag(2) as? UIImageView else { return cell }
-            guard let onlineFriendLabel: UILabel = cell.viewWithTag(3) as? UILabel     else { return cell }
-            
-            guard let user = users?[indexPath.row] else { return cell }
-            nameFriendLabel.text = user.fullName
-            onlineFriendLabel.text = (user.isOnline) ? "online" : "offline"
-            onlineFriendLabel.textColor = (user.isOnline) ? UIColor.green : UIColor.gray
-            guard let url = URL(string: user.urlPhotoString ?? "") else { return cell }
-            imageFriend.downloadImage(fromURL: url, imageCache: imageCache)
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCell.cellIdentifier, for: indexPath) as! FriendTableViewCell
 
+        guard let user = users?[indexPath.row] else { return cell }
+        cell.user = user
+        
         return cell
     }
     
@@ -71,7 +84,6 @@ class FriendsViewController: UITableViewController {
             do {
                 try realm.write {
                     realm.delete(userForDelete)
-                    tableView.deleteRows(at: [indexPath], with: .fade)
                 }
             } catch (let error) {
                 print(error)
@@ -81,29 +93,13 @@ class FriendsViewController: UITableViewController {
 
 
     @objc private func loadData() {
-        VK_User().getUserFriendList(user_id: nil, completion: ({[weak self] users in
-            self?.writeData(users: users) {
-                self?.tableview.reloadData()
-                self?.tableview.refreshControl?.endRefreshing()
+        VKFriends().get(user_id: nil) { [weak self] users in
+            try! self?.realm.write {
+                self?.realm.add(users, update: .all)
             }
-        }))
-    }
-    
-    private func writeData(users: [User]?, completion: @escaping(() -> Void)) {
-        do {
-            guard let users = users else {
-                completion()
-                return
-            }
-            try self.realm.write {
-                realm.add(users, update: .modified)
-                completion()
-            }
-        } catch(let error) {
-            print(error)
-            return
         }
     }
+   
     // MARK: - Navigation
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -111,12 +107,11 @@ class FriendsViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let indexPath = tableview.indexPathForSelectedRow else { return }
-        if(segue.identifier == "toStory") {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        if segue.identifier == "toStory" {
             let datailVC = segue.destination as! ImagesFriendViewController
             datailVC.user = users?[indexPath.row]
         }
-        tableview.deselectRow(at: indexPath, animated: true)
     }
     
 }

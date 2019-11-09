@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         
         if let userToken = KeychainWrapper.standard.string(forKey: "userToken") {
-            VK_API.globalToken = userToken
+            VKAuth.token = userToken
             guard let friendView = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") else { return }
             self.navigationController?.pushViewController(friendView, animated: false)
         }
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
             return
         }
         
-        VK_API.globalToken = userToken
+        VKAuth.token = userToken
 
         performSegue(withIdentifier: "loginDone", sender: nil)
     }

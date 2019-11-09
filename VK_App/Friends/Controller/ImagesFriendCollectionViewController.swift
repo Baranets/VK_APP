@@ -1,14 +1,9 @@
-
 import UIKit
 import AlamofireImage
 
-private let reuseIdentifier = "Cell"
-
-class ImagesFriendViewController: UICollectionViewController {
+class ImagesFriendViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     //MARK: - UI Objects
-
-    @IBOutlet var collectionview: UICollectionView!
     
     //MARK: - Variables
 
@@ -19,17 +14,23 @@ class ImagesFriendViewController: UICollectionViewController {
         preferredMemoryUsageAfterPurge: 8 * 1024 * 1024
     )
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.reloadData()
+    }
+    
     //MARK: - View Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
-        VK_User().getUserPhotos(owner_id: String(user!.id), completion: { [weak self] userPhotos in
+        VKPhotos().get(owner_id: String(user!.id), completion: { [weak self] userPhotos in
             self?.userImages = userPhotos
-            self?.collectionview.reloadData()
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
         })
     }
 
@@ -56,10 +57,19 @@ class ImagesFriendViewController: UICollectionViewController {
         let userPhoto = userImages[indexPath.row]
         
         guard let url = URL(string: userPhoto.urlString) else { return cell }
-        imageUsers.downloadImage(fromURL: url, imageCache: imageCache)
-        
+        ImageDownloader.shared.downloadImage(fromURL: url, imageCache: imageCache) { (image) in
+            DispatchQueue.main.async {
+                imageUsers.image = image
+            }
+        }
     
         return cell
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width / 3) - 1
+        return CGSize(width: width, height: width)
+    }
+    
 }
+

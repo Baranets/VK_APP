@@ -5,7 +5,6 @@ class GroupsWorldViewController: UITableViewController {
 
     //MARK: - UI Objects
 
-    @IBOutlet var tableview: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
     
     //MARK: - Variables
@@ -17,6 +16,9 @@ class GroupsWorldViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.estimatedRowHeight = 100  
+        tableView.register(UINib(nibName: GroupTableViewCell.cellIdentifire, bundle: nil), forCellReuseIdentifier: GroupTableViewCell.cellIdentifire)
         
         searchController.dimsBackgroundDuringPresentation = false
         self.navigationItem.hidesSearchBarWhenScrolling   = false
@@ -33,23 +35,6 @@ class GroupsWorldViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    @IBAction func submit(_ sender: UIButton) {
-        var superview = sender.superview
-        while let view = superview, !(view is UITableViewCell) {
-            superview = view.superview
-        }
-        guard let cell = superview as? UITableViewCell, let indexPath = tableview.indexPath(for: cell) else {
-            return
-        }
-        
-        DispatchQueue.global().async {
-            VK_Group().joinGroup(byGroupID: self.filteredGroups[indexPath.row].id)
-            DispatchQueue.main.async {
-                sender.isHidden = true
-            }
-        }
-    }
 
     // MARK: - Table view data source
 
@@ -62,22 +47,16 @@ class GroupsWorldViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "notUserGroup", for: indexPath)
-
-        guard let groupNameLabel = cell.viewWithTag(1) as? UILabel     else { return cell }
-        guard let groupImage = cell.viewWithTag(2)     as? UIImageView else { return cell }
+        let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCell.cellIdentifire) as! GroupTableViewCell
         
         let group = filteredGroups[indexPath.row]
-        groupNameLabel.text = group.name
-        
-        guard let url = URL(string: group.urlPhotoString ?? "") else { return cell }
-        groupImage.downloadImage(fromURL: url, imageCache: nil)
+        cell.group = group
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableview.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
@@ -89,12 +68,11 @@ extension GroupsWorldViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             filteredGroups.removeAll()
-            tableview.reloadData()
-            return
+            tableView.reloadData()
         } else {
-            VK_Group().getSearchGroups(by: searchText, completion: { [weak self] groups in
+            VKGroup().search(by: searchText, completion: { [weak self] groups in
                 self?.filteredGroups = groups
-                self?.tableview.reloadData()
+                self?.tableView.reloadData()
             })
         }
     }

@@ -8,7 +8,7 @@ class WebViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let request = VK_API().requestLoginView()
+        let request = VKAuth().requestLoginView()
         webView.load(request)
     }
 
@@ -37,11 +37,16 @@ extension WebViewController: WKNavigationDelegate {
             decisionHandler(.allow)
             return
         }
-        guard let token = VK_API().getToken(fragment: fragment) else {
+        guard let token = VKAuth().getToken(fragment: fragment) else {
             return
         }
         KeychainWrapper.standard.set(token, forKey: "userToken")
-        performSegue(withIdentifier: "logined", sender: nil)
+        
+        guard let window = UIApplication.shared.keyWindow else { return }
+        let newRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController")
+        
+        window.switchRootViewController(newRootVC, animated: true, duration: 0.5, options: .transitionCrossDissolve)
+        
         decisionHandler(.cancel)
     }
 }

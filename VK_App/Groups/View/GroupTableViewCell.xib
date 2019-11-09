@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupTableViewCell" customModule="VK_App" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupTableViewCell" rowHeight="59" id="KGk-i7-Jjw" customClass="GroupTableViewCell" customModule="VK_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MBB-2b-llx">
+                        <rect key="frame" x="16" y="8" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="MBB-2b-llx" secondAttribute="height" multiplier="1:1" id="51N-FU-bIW"/>
+                            <constraint firstAttribute="height" constant="35" id="d8A-e2-awE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOH-wy-kXI">
+                        <rect key="frame" x="59" y="8" width="202" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AuD-4v-8d8">
+                        <rect key="frame" x="269" y="8" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="AuD-4v-8d8" secondAttribute="height" multiplier="1:1" id="1Yh-P1-irI"/>
+                        </constraints>
+                        <connections>
+                            <action selector="pressedAddGroupButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XHA-qM-IJQ"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="AuD-4v-8d8" firstAttribute="centerY" secondItem="MBB-2b-llx" secondAttribute="centerY" id="0SU-AH-hhj"/>
+                    <constraint firstItem="MBB-2b-llx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="BJj-IO-nHW"/>
+                    <constraint firstItem="AuD-4v-8d8" firstAttribute="leading" secondItem="wOH-wy-kXI" secondAttribute="trailing" constant="8" id="BvE-m3-l1Y"/>
+                    <constraint firstItem="wOH-wy-kXI" firstAttribute="centerY" secondItem="MBB-2b-llx" secondAttribute="centerY" id="N0x-a7-Q8d"/>
+                    <constraint firstItem="AuD-4v-8d8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Nlp-Y7-iAB"/>
+                    <constraint firstItem="MBB-2b-llx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Uuc-qd-40s"/>
+                    <constraint firstAttribute="trailing" secondItem="AuD-4v-8d8" secondAttribute="trailing" constant="16" id="dXF-bU-B4g"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wOH-wy-kXI" secondAttribute="bottom" constant="8" id="fBX-2h-ghI"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MBB-2b-llx" secondAttribute="bottom" constant="8" id="ktr-Zm-dnq"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AuD-4v-8d8" secondAttribute="bottom" constant="8" id="nXb-Kq-fmB"/>
+                    <constraint firstItem="wOH-wy-kXI" firstAttribute="leading" secondItem="MBB-2b-llx" secondAttribute="trailing" constant="8" id="zZj-NP-vnm"/>
+                    <constraint firstItem="wOH-wy-kXI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="zd2-2k-oIV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="addGroupButton" destination="AuD-4v-8d8" id="doX-0d-GwM"/>
+                <outlet property="groupImageView" destination="MBB-2b-llx" id="TYt-as-4S9"/>
+                <outlet property="groupNameLabel" destination="wOH-wy-kXI" id="Mep-Fq-FWf"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="157.03125"/>
+        </tableViewCell>
+    </objects>
+</document>

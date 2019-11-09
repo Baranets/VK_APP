@@ -3,29 +3,29 @@ import Alamofire
 import SwiftyJSON
 
 ///[EN]Class is designed to work for VK API. Can store information about token of the user /[RU]Класс предназначен для работы с API VK. Может хранить в себе информацию о токене пользователя
-class VK_API {
+class VKAuth: VKConfiguration {    
     
     ///[EN]Variable store the token of the authorized user /[RU]Переменная хранит token залогиненного пользователя
-    static var globalToken: String?
+    static var token: String?
     
-    ///[EN]Variable store version of the API /[RU]Переменная хранит версию API
-    let version = "5.92"
-    
+    var host: String {
+        return "oauth.vk.com"
+    }
+        
     ///[EN]Function returns URL request with authorization page /[RU]Функция возвращает URL запрос с отображением страницы аунтификации
     func requestLoginView() -> URLRequest {
         //[EN] /[RU]Формирование URL запроса
-        var urlComponents = URLComponents()
+        var urlComponents = self.urlComponents
         
-        urlComponents.scheme = "https"
-        urlComponents.host   = "oauth.vk.com"
         urlComponents.path   = "/authorize"
+        
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: "6936822"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value: "327686"),
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: version)
+            URLQueryItem(name: "v", value: apiVersion)
         ]
         
         return URLRequest(url: urlComponents.url!)
@@ -33,16 +33,14 @@ class VK_API {
     
     func requestLogout() {
         
-        var urlComponents = URLComponents()
-
-        urlComponents.scheme = "https"
-        urlComponents.host   = "oauth.vk.com"
+        var urlComponents = self.urlComponents
+        
         urlComponents.path   = "/logout"
         
         Alamofire.request(urlComponents.url!).responseData(completionHandler: { response in
             switch response.result {
             case .success:
-                VK_API.globalToken = nil
+                VKAuth.token = nil
                 print(response)
             case .failure(let error):
                 print(error)
@@ -60,7 +58,7 @@ class VK_API {
             return dict
         }
         let token = params["access_token"]
-        VK_API.globalToken = token
+        VKAuth.token = token
 
         return token
     }
