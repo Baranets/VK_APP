@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DnN-dR-cAp">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Groups Table View Controller-->
+        <scene sceneID="p4S-zc-DLT">
+            <objects>
+                <tableViewController id="Shn-oj-5sx" userLabel="Groups Table View Controller" customClass="GroupsViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="a8O-IO-wSe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Shn-oj-5sx" id="4Ib-wT-ATP"/>
+                            <outlet property="delegate" destination="Shn-oj-5sx" id="keI-lc-LDF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Groups" id="WA6-83-HCa">
+                        <barButtonItem key="rightBarButtonItem" title="Add" image="create_new" id="fFO-An-heE">
+                            <connections>
+                                <segue destination="9Ou-Pg-3lM" kind="show" id="miA-OE-nCd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E2x-Zl-IEw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2572" y="524.8875562218891"/>
+        </scene>
+        <!--Search New Groups-->
+        <scene sceneID="z72-D6-rNc">
+            <objects>
+                <tableViewController id="9Ou-Pg-3lM" customClass="GroupsWorldViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="v72-8F-0gu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="9Ou-Pg-3lM" id="ZWz-sY-sbE"/>
+                            <outlet property="delegate" destination="9Ou-Pg-3lM" id="uFP-0L-dlb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Search New Groups" id="15S-nc-6gv"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ir-u9-zIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3393" y="525"/>
+        </scene>
+        <!--Groups-->
+        <scene sceneID="Fvs-u0-6hZ">
+            <objects>
+                <navigationController storyboardIdentifier="GroupsNavigationController" id="DnN-dR-cAp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Groups" image="people" id="Lwu-Im-shX"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uN3-pG-TkB">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Shn-oj-5sx" kind="relationship" relationship="rootViewController" id="05r-pN-HOE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qWL-6e-ohx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1772" y="525"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="create_new" width="30" height="30"/>
+        <image name="people" width="30" height="30"/>
+    </resources>
+</document>

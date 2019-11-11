@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Friends Table View-->
+        <scene sceneID="MiZ-dG-VLo">
+            <objects>
+                <tableViewController storyboardIdentifier="FriendsViewController" id="73S-Kg-j9Q" userLabel="Friends Table View" customClass="FriendsViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6KG-pa-Qfv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="73S-Kg-j9Q" id="jI7-We-it9"/>
+                            <outlet property="delegate" destination="73S-Kg-j9Q" id="OqV-0K-0ly"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Friends" id="F7W-JF-eti"/>
+                    <connections>
+                        <segue destination="krs-sf-bGt" kind="show" identifier="toStory" id="NB3-ny-TJj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yGQ-uc-Aep" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2572.463768115942" y="-202.98913043478262"/>
+        </scene>
+        <!--Images Friend Collection View Controller-->
+        <scene sceneID="YB0-XW-mlc">
+            <objects>
+                <collectionViewController storyboardIdentifier="ImagesFriend" title="Photos" id="krs-sf-bGt" userLabel="Images Friend Collection View Controller" customClass="ImagesFriendViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2he-JD-RZS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="C9M-DD-wtB">
+                            <size key="itemSize" width="98" height="97"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="collectionUS" id="DLx-do-Lu7">
+                                <rect key="frame" x="0.0" y="0.0" width="98" height="97"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="98" height="97"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grayScreen" translatesAutoresizingMaskIntoConstraints="NO" id="gx2-FI-TWW">
+                                            <rect key="frame" x="0.0" y="0.0" width="98" height="97"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="gx2-FI-TWW" secondAttribute="trailing" id="1xW-K9-cxe"/>
+                                    <constraint firstItem="gx2-FI-TWW" firstAttribute="leading" secondItem="DLx-do-Lu7" secondAttribute="leading" id="8fo-LA-0h2"/>
+                                    <constraint firstAttribute="bottom" secondItem="gx2-FI-TWW" secondAttribute="bottom" id="NLq-ET-Q2R"/>
+                                    <constraint firstItem="gx2-FI-TWW" firstAttribute="top" secondItem="DLx-do-Lu7" secondAttribute="top" id="qXf-vM-Iqy"/>
+                                </constraints>
+                                <size key="customSize" width="98" height="97"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="krs-sf-bGt" id="Ffm-zR-Snh"/>
+                            <outlet property="delegate" destination="krs-sf-bGt" id="Ute-4s-LAT"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LK3-60-gWG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3392.753623188406" y="-202.98913043478262"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="hPe-fO-uiy">
+            <objects>
+                <navigationController storyboardIdentifier="FriendsNavigationController" id="wB6-3q-jbh" userLabel="Friends" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="User Friends" image="user_male" selectedImage="user_male" id="QRC-7H-4l4" userLabel="Friends"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pb8-Fl-XzT">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="73S-Kg-j9Q" kind="relationship" relationship="rootViewController" id="5H5-SW-I0L"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gGW-pX-ffr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1772" y="-201"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="grayScreen" width="56" height="56"/>
+        <image name="user_male" width="30" height="30"/>
+    </resources>
+</document>

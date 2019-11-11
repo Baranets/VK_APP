@@ -93,7 +93,7 @@
                         <outlet property="logButton" destination="85v-5B-MBE" id="j1C-up-Zem"/>
                         <outlet property="loginTextField" destination="Mxu-S8-G4A" id="Qmk-IQ-uL6"/>
                         <outlet property="passwordTextField" destination="Zmf-VS-Qxs" id="nl4-Qu-6gt"/>
-                        <segue destination="MIa-Gw-SYL" kind="show" identifier="loginDone" id="mYP-9A-xrd"/>
+                        <segue destination="YJO-88-UOp" kind="show" identifier="loginDone" id="mYP-9A-xrd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -144,240 +144,28 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="H9J-fw-aw9" id="1gP-7h-8Wc"/>
-                        <segue destination="MIa-Gw-SYL" kind="show" identifier="logined" id="lQs-ZL-Som"/>
+                        <segue destination="YJO-88-UOp" kind="show" identifier="logined" id="lQs-ZL-Som"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7Y-Mx-0j8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204" y="400"/>
+            <point key="canvasLocation" x="-204" y="384"/>
         </scene>
-        <!--Friends Table View-->
-        <scene sceneID="MiZ-dG-VLo">
+        <!--TabBarController-->
+        <scene sceneID="nso-sl-Tgw">
             <objects>
-                <tableViewController storyboardIdentifier="FriendsViewController" id="73S-Kg-j9Q" userLabel="Friends Table View" customClass="FriendsViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6KG-pa-Qfv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <connections>
-                            <outlet property="dataSource" destination="73S-Kg-j9Q" id="jI7-We-it9"/>
-                            <outlet property="delegate" destination="73S-Kg-j9Q" id="OqV-0K-0ly"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Friends" id="F7W-JF-eti"/>
-                    <connections>
-                        <segue destination="krs-sf-bGt" kind="show" identifier="toStory" id="NB3-ny-TJj"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yGQ-uc-Aep" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="TabBarController" storyboardName="RootTabBar" referencedIdentifier="TabBarController" id="YJO-88-UOp" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="whf-Z5-Olz"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NDH-Vw-Y3m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2572.463768115942" y="-202.98913043478262"/>
-        </scene>
-        <!--Images Friend Collection View Controller-->
-        <scene sceneID="YB0-XW-mlc">
-            <objects>
-                <collectionViewController storyboardIdentifier="ImagesFriend" title="Photos" id="krs-sf-bGt" userLabel="Images Friend Collection View Controller" customClass="ImagesFriendViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2he-JD-RZS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="C9M-DD-wtB">
-                            <size key="itemSize" width="98" height="97"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="collectionUS" id="DLx-do-Lu7">
-                                <rect key="frame" x="0.0" y="0.0" width="98" height="97"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="98" height="97"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grayScreen" translatesAutoresizingMaskIntoConstraints="NO" id="gx2-FI-TWW">
-                                            <rect key="frame" x="0.0" y="0.0" width="98" height="97"/>
-                                        </imageView>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="gx2-FI-TWW" secondAttribute="trailing" id="1xW-K9-cxe"/>
-                                    <constraint firstItem="gx2-FI-TWW" firstAttribute="leading" secondItem="DLx-do-Lu7" secondAttribute="leading" id="8fo-LA-0h2"/>
-                                    <constraint firstAttribute="bottom" secondItem="gx2-FI-TWW" secondAttribute="bottom" id="NLq-ET-Q2R"/>
-                                    <constraint firstItem="gx2-FI-TWW" firstAttribute="top" secondItem="DLx-do-Lu7" secondAttribute="top" id="qXf-vM-Iqy"/>
-                                </constraints>
-                                <size key="customSize" width="98" height="97"/>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="krs-sf-bGt" id="Ffm-zR-Snh"/>
-                            <outlet property="delegate" destination="krs-sf-bGt" id="Ute-4s-LAT"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LK3-60-gWG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3392.753623188406" y="-202.98913043478262"/>
-        </scene>
-        <!--Groups Table View Controller-->
-        <scene sceneID="p4S-zc-DLT">
-            <objects>
-                <tableViewController id="Shn-oj-5sx" userLabel="Groups Table View Controller" customClass="GroupsViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="a8O-IO-wSe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <connections>
-                            <outlet property="dataSource" destination="Shn-oj-5sx" id="4Ib-wT-ATP"/>
-                            <outlet property="delegate" destination="Shn-oj-5sx" id="keI-lc-LDF"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Groups" id="WA6-83-HCa">
-                        <barButtonItem key="rightBarButtonItem" title="Add" image="create_new" id="fFO-An-heE">
-                            <connections>
-                                <segue destination="9Ou-Pg-3lM" kind="show" id="miA-OE-nCd"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E2x-Zl-IEw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2572" y="524.8875562218891"/>
-        </scene>
-        <!--Settings-->
-        <scene sceneID="EZ6-iN-kRI">
-            <objects>
-                <tableViewController id="wXM-ga-FgW" customClass="SettingsTableViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hWt-2O-8y6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" id="m97-L2-Ltn">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m97-L2-Ltn" id="4kz-JP-YkF">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="wXM-ga-FgW" id="1cC-bG-Uk8"/>
-                            <outlet property="delegate" destination="wXM-ga-FgW" id="L6R-zq-EY4"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="xRY-Cn-rKM">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="Qdo-A8-sPJ">
-                            <connections>
-                                <action selector="logoutAction:" destination="wXM-ga-FgW" id="8Gj-NX-fW4"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BzU-MJ-LzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2574" y="-970"/>
-        </scene>
-        <!--Settings-->
-        <scene sceneID="sF7-vO-ZmX">
-            <objects>
-                <navigationController id="1cB-2Q-lD9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="Ms7-xx-MOr"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="e29-Xn-OgQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="wXM-ga-FgW" kind="relationship" relationship="rootViewController" id="fMo-qP-Fnr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zVd-Ik-yRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1772" y="-969"/>
-        </scene>
-        <!--Search New Groups-->
-        <scene sceneID="z72-D6-rNc">
-            <objects>
-                <tableViewController id="9Ou-Pg-3lM" customClass="GroupsWorldViewController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="v72-8F-0gu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <connections>
-                            <outlet property="dataSource" destination="9Ou-Pg-3lM" id="ZWz-sY-sbE"/>
-                            <outlet property="delegate" destination="9Ou-Pg-3lM" id="uFP-0L-dlb"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Search New Groups" id="15S-nc-6gv"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ir-u9-zIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3393" y="525"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="ePt-8Y-T70">
-            <objects>
-                <tabBarController storyboardIdentifier="TabBarController" id="MIa-Gw-SYL" customClass="TabBarController" customModule="VK_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5hU-5B-0m2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="wB6-3q-jbh" kind="relationship" relationship="viewControllers" id="l7s-Fa-Nbe"/>
-                        <segue destination="DnN-dR-cAp" kind="relationship" relationship="viewControllers" id="PmN-bh-JRx"/>
-                        <segue destination="1cB-2Q-lD9" kind="relationship" relationship="viewControllers" id="uTA-b0-jv6"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nOh-qK-5bo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="566" y="400"/>
-        </scene>
-        <!--Groups-->
-        <scene sceneID="Fvs-u0-6hZ">
-            <objects>
-                <navigationController id="DnN-dR-cAp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Groups" image="people" id="Lwu-Im-shX"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uN3-pG-TkB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Shn-oj-5sx" kind="relationship" relationship="rootViewController" id="05r-pN-HOE"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qWL-6e-ohx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1772" y="525"/>
-        </scene>
-        <!--Friends-->
-        <scene sceneID="hPe-fO-uiy">
-            <objects>
-                <navigationController id="wB6-3q-jbh" userLabel="Friends" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="User Friends" image="user_male" selectedImage="user_male" id="QRC-7H-4l4" userLabel="Friends"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pb8-Fl-XzT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="73S-Kg-j9Q" kind="relationship" relationship="rootViewController" id="5H5-SW-I0L"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gGW-pX-ffr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1772" y="-201"/>
+            <point key="canvasLocation" x="977" y="-373"/>
         </scene>
     </scenes>
     <resources>
-        <image name="create_new" width="30" height="30"/>
-        <image name="grayScreen" width="56" height="56"/>
         <image name="mountainsImage" width="5120" height="3684"/>
-        <image name="people" width="30" height="30"/>
-        <image name="settings" width="30" height="30"/>
-        <image name="user_male" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mYP-9A-xrd"/>
+        <segue reference="lQs-ZL-Som"/>
     </inferredMetricsTieBreakers>
 </document>
