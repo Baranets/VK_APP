@@ -38,30 +38,35 @@ class GroupsViewController: UITableViewController {
     
     deinit {
         notificationToken?.invalidate()
-        realm.invalidate()
     }
     
     private func configureRealm() {
         groups = loadRealmData()
 
         notificationToken = groups?.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            
             switch changes {
             case .initial:
-                self?.tableView.reloadData()
+                tableView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
-                self?.tableView.beginUpdates()
-                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                tableView.beginUpdates()
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
                                         with: .automatic)
-                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-                                        with: .none)
-                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-                                        with: .none)
-                self?.tableView.endUpdates()
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                        with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                           with: .automatic)
+                tableView.endUpdates()
                 
+                if !modifications.isEmpty {
+                    let topIndex = IndexPath(row: 0, section: 0)
+                    tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+                }
             case .error(let error):
                 print(error)
             }
-            self?.tableView.refreshControl?.endRefreshing()
+            tableView.refreshControl?.endRefreshing()
 
         }
     }

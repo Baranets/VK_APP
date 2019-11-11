@@ -31,10 +31,6 @@ class GroupsWorldViewController: UITableViewController {
         super.viewWillDisappear(animated)
         searchController.dismiss(animated: false, completion: nil)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
     // MARK: - Table view data source
 

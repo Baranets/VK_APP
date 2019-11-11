@@ -53,10 +53,7 @@ class VKGroup: VKConfiguration {
         
         Alamofire.request(urlComponents.url!).responseData { response in
             switch response.result {
-            case .success:
-                guard let data = response.value else {
-                    return
-                }
+            case .success(let data):
                 do {
                     let json = try JSON(data: data)
                     let groups = json["response"]["items"].compactMap { Group(json: $0.1) }

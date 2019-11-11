@@ -1,4 +1,5 @@
 import UIKit
+import SwiftKeychainWrapper
 
 class SettingsTableViewController: UITableViewController {
 
@@ -18,7 +19,7 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func logoutAction(_ sender: UIBarButtonItem) {
 //        VK_API().requestLogout()
-        UserDefaults.standard.removeObject(forKey: "userToken")
+        KeychainWrapper.standard.removeObject(forKey: "userToken")
         let friendView = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
         self.navigationController?.pushViewController(friendView, animated: true)
     }

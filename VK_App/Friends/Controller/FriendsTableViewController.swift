@@ -33,7 +33,6 @@ class FriendsViewController: UITableViewController {
     
     deinit {
         notificationToken?.invalidate()
-        realm.invalidate()
     }
     
     private func configureRealm() {
