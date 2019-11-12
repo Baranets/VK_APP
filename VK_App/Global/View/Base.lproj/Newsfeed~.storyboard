@@ -69,7 +69,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tabBar>
                     <connections>
-                        <segue destination="lZc-Er-GaM" kind="relationship" relationship="viewControllers" id="iYw-2K-eiE"/>
+                        <segue destination="mxk-wP-79d" kind="relationship" relationship="viewControllers" id="iYw-2K-eiE"/>
                         <segue destination="pid-Tm-32G" kind="relationship" relationship="viewControllers" id="IJ2-jN-wit"/>
                         <segue destination="L6g-NV-hcC" kind="relationship" relationship="viewControllers" id="PmN-bh-JRx"/>
                         <segue destination="1cB-2Q-lD9" kind="relationship" relationship="viewControllers" id="uTA-b0-jv6"/>
@@ -78,6 +78,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nOh-qK-5bo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="878" y="68"/>
+        </scene>
+        <!--Newsfeed-->
+        <scene sceneID="Cg6-7T-BTc">
+            <objects>
+                <tableViewController id="BVt-kb-yVb" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YJg-iT-lPF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="a2c-yo-ebE">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a2c-yo-ebE" id="pHA-gg-5al">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BVt-kb-yVb" id="4nN-sX-kKk"/>
+                            <outlet property="delegate" destination="BVt-kb-yVb" id="0kG-bX-PiV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Newsfeed" id="Guw-vY-nrv"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7in-zY-l8x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3326" y="-1046"/>
+        </scene>
+        <!--Newsfeed-->
+        <scene sceneID="6XC-Go-qb2">
+            <objects>
+                <navigationController id="mxk-wP-79d" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Newsfeed" image="newsfeed" id="6l3-GD-cpb"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GWs-T8-OkN">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BVt-kb-yVb" kind="relationship" relationship="rootViewController" id="S84-Cq-foI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a1T-nf-hZc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2407" y="-1046"/>
         </scene>
         <!--FriendsNavigationController-->
         <scene sceneID="GLa-Cr-qAw">
@@ -99,18 +145,9 @@
             </objects>
             <point key="canvasLocation" x="2425" y="-123"/>
         </scene>
-        <!--Newsfeed-->
-        <scene sceneID="B1S-Ed-899">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Newsfeed" id="lZc-Er-GaM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="s36-vk-pcy"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fjZ-4c-PCn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2407" y="-1046"/>
-        </scene>
     </scenes>
     <resources>
+        <image name="newsfeed" width="25" height="25"/>
         <image name="people" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>
         <image name="user_male" width="30" height="30"/>

@@ -17,12 +17,12 @@ class ImageDownloader {
     
     let cache = AutoPurgingImageCache(
         memoryCapacity: 256 * 1024 * 1024,
-        preferredMemoryUsageAfterPurge: 128 * 1024 * 1024
+        preferredMemoryUsageAfterPurge: 192 * 1024 * 1024
     )
     
     func downloadImage(fromURL: URL, imageCache: AutoPurgingImageCache?, completion: @escaping (UIImage?) -> ()) {
-        let key = fromURL
-        DispatchQueue.global().async {
+            let key = fromURL
+            
             guard let cache = imageCache == nil ? self.cache : imageCache else { return }
             let urlRequest = URLRequest(url: fromURL)
 
@@ -34,12 +34,12 @@ class ImageDownloader {
                 switch response.result {
                 case .success(let image):
                     cache.add(image, for: urlRequest)
-                    completion(key == fromURL ? image : nil)
+                    completion(key == fromURL ? image : UIImage())
                 case .failure(let error):
                     print(error)
-                    completion(nil)
+                    completion(UIImage())
                 }
             }
-        }
+        
     }
 }

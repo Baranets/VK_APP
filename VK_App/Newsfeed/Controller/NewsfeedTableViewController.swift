@@ -1,37 +1,67 @@
+//
+//  NewsfeedTableViewController.swift
+//  VK_App
+//
+//  Created by Maxim Baranets on 11.11.2019.
+//  Copyright © 2019 Maxim. All rights reserved.
+//
+
 import UIKit
-import SwiftKeychainWrapper
 
-class SettingsTableViewController: UITableViewController {
+class NewsfeedTableViewController: UITableViewController {
 
+    var posts = [Post]()
+    var groups = [Group]()
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        tableView.estimatedRowHeight = 100
+//        tableView.rowHeight = UITableView.automaticDimension
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.register(PostTableViewCell.nib, forCellReuseIdentifier: PostTableViewCell.cellIdentifier)
+//        tableView.estimatedRowHeight = 1000
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.separatorStyle = .none
+
+        VKNewsFeed().get(startFrom: nil) { [weak self] (posts, groups) in
+            defer {
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            }
+            guard let posts = posts,
+                let groups = groups else { return }
+            
+            self?.posts = posts
+            self?.groups = groups
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        // #warning Incomplete implementation, return the number of sections
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        // #warning Incomplete implementation, return the number of rows
+        return posts.count
     }
-    
-    @IBAction func logoutAction(_ sender: UIBarButtonItem) {
-//        VK_API().requestLogout()
-        guard let startViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() else { return }
-        KeychainWrapper.standard.removeObject(forKey: "userToken")
-        self.navigationController?.pushViewController(startViewController, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath)
 
-        // Configure the cell...
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.cellIdentifier, for: indexPath) as! PostTableViewCell
+
+        let post = posts[indexPath.row]
+        let group = groups.first(where: {$0.id == post.sourceId || -$0.id == post.sourceId})
+        cell.set(post: post, group: group)
 
         return cell
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
@@ -43,7 +73,7 @@ class SettingsTableViewController: UITableViewController {
 
     /*
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)

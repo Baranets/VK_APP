@@ -79,7 +79,7 @@
         <scene sceneID="hPe-fO-uiy">
             <objects>
                 <navigationController storyboardIdentifier="FriendsNavigationController" id="wB6-3q-jbh" userLabel="Friends" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="User Friends" image="user_male" selectedImage="user_male" id="QRC-7H-4l4" userLabel="Friends"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="user_male" selectedImage="user_male" id="QRC-7H-4l4" userLabel="Friends"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pb8-Fl-XzT">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

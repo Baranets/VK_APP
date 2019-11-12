@@ -13,7 +13,7 @@ import SwiftyJSON
 class VKPhotos: VKConfiguration {
     
     ///Return list of the photos specified user (if the owner_id == nil then return the list of the photos of the logined user)
-       func get(owner_id: String?, completion: @escaping ([UserPhoto]) -> Void) {
+       func get(owner_id: String?, completion: @escaping ([Photo]) -> Void) {
            
            //Create a URL request
            var urlComponents = self.urlComponents
@@ -32,7 +32,7 @@ class VKPhotos: VKConfiguration {
                DispatchQueue.global().async {
                    do {
                        let json = try JSON(data: data)
-                       let userPhotos = json["response"]["items"].compactMap { UserPhoto(json: $0.1) }
+                       let userPhotos = json["response"]["items"].compactMap { Photo(json: $0.1) }
                        completion(userPhotos)
                    } catch {
                        return

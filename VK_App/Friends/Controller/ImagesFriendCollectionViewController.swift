@@ -8,7 +8,7 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
     //MARK: - Variables
 
     var user: User?
-    var userImages = [UserPhoto]()
+    var userImages = [Photo]()
     let imageCache = AutoPurgingImageCache(
         memoryCapacity: 16 * 1024 * 1024,
         preferredMemoryUsageAfterPurge: 8 * 1024 * 1024
@@ -56,7 +56,7 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
 
         let userPhoto = userImages[indexPath.row]
         
-        guard let url = URL(string: userPhoto.urlString) else { return cell }
+        guard let url = userPhoto.sizes[0].url else { return cell }
         ImageDownloader.shared.downloadImage(fromURL: url, imageCache: imageCache) { (image) in
             DispatchQueue.main.async {
                 imageUsers.image = image
