@@ -12,18 +12,12 @@ class NewsfeedTableViewController: UITableViewController {
 
     var posts = [Post]()
     var groups = [Group]()
-//
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        tableView.estimatedRowHeight = 100
-//        tableView.rowHeight = UITableView.automaticDimension
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.register(PostTableViewCell.nib, forCellReuseIdentifier: PostTableViewCell.cellIdentifier)
-//        tableView.estimatedRowHeight = 1000
+//        tableView.estimatedRowHeight = 100
 //        tableView.rowHeight = UITableView.automaticDimension
 //        tableView.separatorStyle = .none
 
@@ -59,7 +53,7 @@ class NewsfeedTableViewController: UITableViewController {
         let post = posts[indexPath.row]
         let group = groups.first(where: {$0.id == post.sourceId || -$0.id == post.sourceId})
         cell.set(post: post, group: group)
-
+        
         return cell
     }
 

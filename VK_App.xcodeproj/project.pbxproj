@@ -72,6 +72,7 @@
 		50BA58BF219B654500982E3F /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		50D70DCB219DB70B003F9529 /* VKFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKFriends.swift; sourceTree = "<group>"; };
 		50D70DCD219DB7F2003F9529 /* VKGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKGroup.swift; sourceTree = "<group>"; };
+		50DDB2BB237F965E0059E926 /* VK_App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VK_App.entitlements; sourceTree = "<group>"; };
 		50E05FE121514B390077161D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50F59C17219651D50030EA4C /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		64D3E27EF30EB773AB63EF4B /* Pods-VK_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK_App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VK_App/Pods-VK_App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -458,6 +459,7 @@
 		9471E34E2128F86200730643 /* VK_App */ = {
 			isa = PBXGroup;
 			children = (
+				50DDB2BB237F965E0059E926 /* VK_App.entitlements */,
 				9471E34F2128F86200730643 /* AppDelegate.swift */,
 				9471E35B2128F86300730643 /* Info.plist */,
 				50E05FE121514B390077161D /* Assets.xcassets */,
@@ -808,6 +810,7 @@
 			baseConfigurationReference = 64D3E27EF30EB773AB63EF4B /* Pods-VK_App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VK_App/VK_App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LUGU79P6AZ;
@@ -820,6 +823,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "My-VK-APP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -830,6 +834,7 @@
 			baseConfigurationReference = 710D4125137E0F8DA256F06F /* Pods-VK_App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VK_App/VK_App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LUGU79P6AZ;
@@ -842,6 +847,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "My-VK-APP";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -28,9 +28,6 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var repostButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     
-    
-
-    
     func set(post: Post, group: Group?) {
         
         postTextLabel.text = post.text
@@ -44,7 +41,7 @@ class PostTableViewCell: UITableViewCell {
         
         let imageIndex = post.attachments[0].sizes.count - 1
         guard let postURL = post.attachments[0].sizes[imageIndex].url else { return }
-
+        
         ImageDownloader.shared.downloadImage(fromURL: postURL, imageCache: nil) { (image) in
             DispatchQueue.main.async {
                 self.postImageView.image = image
@@ -53,7 +50,6 @@ class PostTableViewCell: UITableViewCell {
         
         guard let group = group else { return }
         groupNameLabel.text = group.name
-        
         guard let groupURL = group.smallPhotoURL else { return }
         ImageDownloader.shared.downloadImage(fromURL: groupURL, imageCache: nil) { (image) in
             DispatchQueue.main.async {
@@ -64,13 +60,20 @@ class PostTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configure()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    private func configure() {
+        let layer = self.groupImageView.layer
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.white.cgColor
+        layer.cornerRadius = groupImageView.frame.size.width / 2
     }
     
 }
