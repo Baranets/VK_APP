@@ -25,7 +25,7 @@ class VKPhotos: VKConfiguration {
                URLQueryItem(name: "album_id", value: "profile")
            ] + defaultQueryItems
            //Treatment of the JSON
-           Alamofire.request(urlComponents.url!).responseData { response in
+           Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
                guard let data = response.value else {
                    return
                }

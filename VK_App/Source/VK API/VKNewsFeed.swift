@@ -26,7 +26,7 @@ class VKNewsFeed: VKConfiguration {
         }
         
         
-        Alamofire.request(urlComponents.url!).responseData { (response) in
+        Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { (response) in
             switch response.result {
             case .success(let data):
                 do {

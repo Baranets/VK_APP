@@ -19,7 +19,7 @@ class VKGroup: VKConfiguration {
             urlComponents.queryItems?.append(URLQueryItem(name: "user_id", value: userId ?? ""))
         }
 
-        Alamofire.request(urlComponents.url!).responseData { response in
+        Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
             switch response.result {
             case .success:
                 guard let data = response.value else {
@@ -51,7 +51,7 @@ class VKGroup: VKConfiguration {
             URLQueryItem(name: "q", value: search ?? "")
         ] + defaultQueryItems
         
-        Alamofire.request(urlComponents.url!).responseData { response in
+        Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
             switch response.result {
             case .success(let data):
                 do {

@@ -14,6 +14,7 @@ protocol VKConfiguration {
     var scheme: String { get }
     var host: String { get }
     var defaultQueryItems: [URLQueryItem] { get }
+    var dispatchQueue: DispatchQueue { get }
     var apiVersion: String { get }
         
 }
@@ -33,6 +34,10 @@ extension VKConfiguration {
             URLQueryItem(name: "access_token", value: VKAuth.token),
             URLQueryItem(name: "v", value: apiVersion)
         ]
+    }
+    
+    var dispatchQueue: DispatchQueue {
+        return .global(qos: .utility)
     }
     
     var scheme: String {

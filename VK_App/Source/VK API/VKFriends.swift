@@ -14,7 +14,7 @@ class VKFriends: VKConfiguration {
             URLQueryItem(name: "fields", value: "city,domain,photo")
         ] + defaultQueryItems
         
-        Alamofire.request(urlComponents.url!).responseData { response in
+        Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
             switch response.result {
             case .success(let data):
                 do {
