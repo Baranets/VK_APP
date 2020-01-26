@@ -24,6 +24,8 @@ class FriendsViewController: UITableViewController {
         
         configureRealm()
         
+        
+        
         loadData()
     }
     

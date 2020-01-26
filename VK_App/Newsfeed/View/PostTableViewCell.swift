@@ -33,7 +33,7 @@ class PostTableViewCell: UITableViewCell {
         repostButton.setTitle(String(post.reposts.count), for: .normal)
         commentButton.setTitle(String(post.comments.count), for: .normal)
         
-        if let postURL = (post.attachments.first?.media as? VKPhoto)?.sizes.last?.photoURL {
+        if let postURL = (post.attachments?.first?.media as? VKPhoto)?.sizes.last?.photoURL {
             postImageView.af_setImage(withURL: postURL,
                                       placeholderImage: UIImage(),
                                       progressQueue: .global(qos: .utility),

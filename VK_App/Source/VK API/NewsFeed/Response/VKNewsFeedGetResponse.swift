@@ -30,12 +30,12 @@ struct Response: Codable {
 
 // MARK: - Item
 struct VKPost: Codable {
-    let canDoubtCategory, canSetCategory: Bool
+    let canDoubtCategory, canSetCategory: Bool?
     let type: String
     let sourceId, date: Int
     let postType, text: String
     let markedAsAds: Int
-    let attachments: [VKAttachment]
+    let attachments: [VKAttachment]?
     let postSource: VKPostSource
     let comments: VKComments
     let likes: VKLikes

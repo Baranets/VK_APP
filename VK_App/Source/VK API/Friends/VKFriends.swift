@@ -3,6 +3,12 @@ import Alamofire
 
 class VKFriends: VKConfiguration {
     
+    let viewController: UIViewController
+    
+    init(viewController: UIViewController) {
+        self.viewController = viewController
+    }
+    
     func get(by userId: Int?, completion: @escaping (VKFriendGetResponse) -> Void) {
         var urlComponents = self.urlComponents
         
@@ -31,6 +37,16 @@ class VKFriends: VKConfiguration {
             case .failure(let error):
                 print(error)
                 print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    if let tvc = self.viewController as? UITableViewController {
+                        tvc.tableView.refreshControl?.endRefreshing()
+                    } else if let cvc = self.viewController as? UICollectionViewController {
+                        cvc.collectionView.refreshControl?.endRefreshing()
+                    }
+                    
+                    let alert = AlertBuilder().createAlert(title: "No Internet", message: "Wow")
+                    self.viewController.present(alert, animated: true)
+                }
             }
         }
     }

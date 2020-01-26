@@ -20,7 +20,7 @@ class VKRequestFactory {
     }
     
     func loadFriendList(by userId: Int?) {
-        VKFriends().get(by: userId) { (response) in
+        VKFriends(viewController: viewController).get(by: userId) { (response) in
             let opQueue = OperationQueue()
             let op = RealmSaveOperation(response.response.items, update: .all)
             opQueue.addOperation(op)
