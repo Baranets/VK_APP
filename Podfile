@@ -10,7 +10,6 @@ target 'VK_App' do
   pod 'Alamofire'
   pod 'AlamofireImage'
   pod 'RealmSwift'
-  pod 'SwiftyJSON'
   pod 'SwiftKeychainWrapper'
   
 end

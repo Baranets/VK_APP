@@ -5,13 +5,8 @@ import RealmSwift
 class FriendsViewController: UITableViewController {
 
     //MARK: - Variables
-    let imageCache = AutoPurgingImageCache(
-        memoryCapacity: 48 * 1024 * 1024,
-        preferredMemoryUsageAfterPurge: 32 * 1024 * 1024
-    )
     
-    var realm = try! Realm()
-    var users: Results<User>?
+    var friends: Results<VKFriend>?
     var notificationToken: NotificationToken?
   
     //MARK: - View Functions
@@ -19,7 +14,8 @@ class FriendsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: FriendTableViewCell.cellIdentifier, bundle: nil), forCellReuseIdentifier: FriendTableViewCell.cellIdentifier)
+        tableView.register(FriendTableViewCell.nib,
+                           forCellReuseIdentifier: FriendTableViewCell.cellIdentifier)
         tableView.estimatedRowHeight = 600
 
         let refreshcontrol = UIRefreshControl()
@@ -36,9 +32,10 @@ class FriendsViewController: UITableViewController {
     }
     
     private func configureRealm() {
-        users = self.realm.objects(User.self).sorted(byKeyPath: "lastName", ascending: true)
+        let realm = try! Realm()
+        friends = realm.objects(VKFriend.self).sorted(byKeyPath: "lastName", ascending: true)
 
-        notificationToken = users?.observe { [weak self] (changes: RealmCollectionChange) in
+        notificationToken = friends?.observe { [weak self] (changes: RealmCollectionChange) in
             switch changes {
             case .initial:
                 self?.tableView.reloadData()
@@ -65,38 +62,31 @@ class FriendsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users?.count ?? 0
+        return friends?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCell.cellIdentifier, for: indexPath) as! FriendTableViewCell
 
-        guard let user = users?[indexPath.row] else { return cell }
-        cell.user = user
+        guard let user = friends?[indexPath.row] else { return cell }
+        cell.friend = user
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let userForDelete = users?[indexPath.row] else { return }
-            do {
-                try realm.write {
-                    realm.delete(userForDelete)
-                }
-            } catch (let error) {
-                print(error)
+            guard let friendDelete = friends?[indexPath.row] else { return }
+            let realm = try! Realm()
+            try? realm.write {
+                realm.delete(friendDelete)
             }
         }
     }
 
 
     @objc private func loadData() {
-        VKFriends().get(user_id: nil) { [weak self] users in
-            try! self?.realm.write {
-                self?.realm.add(users, update: .all)
-            }
-        }
+        VKRequestFactory(viewController: self).loadFriendList(by: nil)
     }
    
     // MARK: - Navigation
@@ -109,7 +99,7 @@ class FriendsViewController: UITableViewController {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         if segue.identifier == "toStory" {
             let datailVC = segue.destination as! ImagesFriendViewController
-            datailVC.user = users?[indexPath.row]
+            datailVC.user = friends?[indexPath.row]
         }
     }
     

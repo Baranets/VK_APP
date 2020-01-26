@@ -7,15 +7,13 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
     
     //MARK: - Variables
 
-    var user: User?
-    var userImages = [Photo]()
-    let imageCache = AutoPurgingImageCache(
-        memoryCapacity: 16 * 1024 * 1024,
-        preferredMemoryUsageAfterPurge: 8 * 1024 * 1024
-    )
+    var user: VKFriend?
+    
+    var images = [VKPhoto]()
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        collectionView.reloadData()
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        flowLayout.invalidateLayout()
     }
     
     //MARK: - View Functions
@@ -26,8 +24,8 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        VKPhotos().get(owner_id: String(user!.id), completion: { [weak self] userPhotos in
-            self?.userImages = userPhotos
+        VKPhotos().get(ownerId: user!.id, completion: { [weak self] response in
+            self?.images = response.response.items
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
@@ -46,7 +44,7 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userImages.count
+        return images.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -54,14 +52,10 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
     
         guard let imageUsers = cell.viewWithTag(1) as? UIImageView else { return cell }
 
-        let userPhoto = userImages[indexPath.row]
+        let image = images[indexPath.row]
         
-        guard let url = userPhoto.sizes[0].url else { return cell }
-        ImageDownloader.shared.downloadImage(fromURL: url, imageCache: imageCache) { (image) in
-            DispatchQueue.main.async {
-                imageUsers.image = image
-            }
-        }
+        guard let url = image.sizes.first?.photoURL else { return cell }
+        imageUsers.af_setImage(withURL: url, placeholderImage: UIImage(), progressQueue: .global(), imageTransition: UIImageView.ImageTransition.crossDissolve(0.2), runImageTransitionIfCached: false)
     
         return cell
     }

@@ -18,20 +18,20 @@ class GroupTableViewCell: UITableViewCell {
     @IBOutlet weak var groupNameLabel: UILabel!
     @IBOutlet weak var addGroupButton: UIButton!
     
-    var group: Group? {
+    var group: VKGroup? {
         didSet {
             guard let group = self.group else { return }
             
             groupNameLabel.text = group.name
-            addGroupButton.isHidden = group.isMember
+            addGroupButton.isHidden = group.isMember == 1
             
-            guard let url = URL(string: group.urlPhotoString ?? "") else { return }
-               
-           ImageDownloader.shared.downloadImage(fromURL: url, imageCache: nil) { (image) in
-               DispatchQueue.main.async {
-                self.groupImageView.image = image
-               }
-           }
+            guard let url = URL(string: group.photo100) else { return }
+            
+            groupImageView.af_setImage(withURL: url,
+                                       placeholderImage: UIImage(),
+                                       progressQueue: .global(qos: .utility),
+                                       imageTransition: .crossDissolve(0.2),
+                                       runImageTransitionIfCached: false)
         }
     }
     
@@ -50,7 +50,7 @@ class GroupTableViewCell: UITableViewCell {
     
     @IBAction func pressedAddGroupButton(_ sender: Any) {
         guard let group = self.group else { return }
-        VKGroup().join(group_id: group.id)
+        VKGroupRequest().join(group_id: group.id)
             DispatchQueue.main.async {
                 self.addGroupButton.isHidden = true
         }

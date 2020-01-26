@@ -16,7 +16,7 @@ protocol VKConfiguration {
     var defaultQueryItems: [URLQueryItem] { get }
     var dispatchQueue: DispatchQueue { get }
     var apiVersion: String { get }
-        
+    
 }
 
 extension VKConfiguration {

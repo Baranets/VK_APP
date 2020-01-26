@@ -10,14 +10,6 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    class var cellIdentifier: String {
-        return "PostTableViewCell"
-    }
-    
-    class var nib: UINib {
-        return UINib(nibName: cellIdentifier, bundle: nil)
-    }
-    
     @IBOutlet weak var groupImageView: UIImageView!
     @IBOutlet weak var groupNameLabel: UILabel!
     
@@ -28,33 +20,35 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var repostButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     
-    func set(post: Post, group: Group?) {
+    func set(post: VKPost, group: VKGroup?) {
         
         postTextLabel.text = post.text
         
-        let image = post.likes.isLiked ? UIImage(imageLiteralResourceName: "heart.fill") : UIImage(imageLiteralResourceName: "heart")
+        let image = post.likes.userLikes == 1 ?
+            UIImage(imageLiteralResourceName: "heart.fill") :
+            UIImage(imageLiteralResourceName: "heart")
         likeButton.setImage(image, for: .normal)
         
         likeButton.setTitle(String(post.likes.count), for: .normal)
         repostButton.setTitle(String(post.reposts.count), for: .normal)
         commentButton.setTitle(String(post.comments.count), for: .normal)
         
-        let imageIndex = post.attachments[0].sizes.count - 1
-        guard let postURL = post.attachments[0].sizes[imageIndex].url else { return }
-        
-        ImageDownloader.shared.downloadImage(fromURL: postURL, imageCache: nil) { (image) in
-            DispatchQueue.main.async {
-                self.postImageView.image = image
-            }
+        if let postURL = (post.attachments.first?.media as? VKPhoto)?.sizes.last?.photoURL {
+            postImageView.af_setImage(withURL: postURL,
+                                      placeholderImage: UIImage(),
+                                      progressQueue: .global(qos: .utility),
+                                      imageTransition: .crossDissolve(0.2),
+                                      runImageTransitionIfCached: false)
         }
         
         guard let group = group else { return }
         groupNameLabel.text = group.name
-        guard let groupURL = group.smallPhotoURL else { return }
-        ImageDownloader.shared.downloadImage(fromURL: groupURL, imageCache: nil) { (image) in
-            DispatchQueue.main.async {
-                self.groupImageView.image = image
-            }
+        if let groupURL = URL(string: group.photo100) {
+            groupImageView.af_setImage(withURL: groupURL,
+                                       placeholderImage: UIImage(),
+                                       progressQueue: .global(qos: .utility),
+                                       imageTransition: .crossDissolve(0.2),
+                                       runImageTransitionIfCached: false)
         }
     }
     

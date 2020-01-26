@@ -8,7 +8,7 @@ class GroupsViewController: UITableViewController {
     let searchBarController = UISearchController(searchResultsController: nil)
     
     let realm = try! Realm()
-    var groups: Results<Group>?
+    var groups: Results<VKGroup>?
     var notificationToken: NotificationToken?
         
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,7 +95,7 @@ class GroupsViewController: UITableViewController {
         UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let group = self.groups?[indexPath.row] else { return }
-            VKGroup().leave(groupId: group.id) { [weak self] in
+            VKGroupRequest().leave(groupId: group.id) { [weak self] in
                 try! self?.realm.write {
                     self?.realm.delete(group)
                 }
@@ -111,16 +111,12 @@ class GroupsViewController: UITableViewController {
     }
     
     @objc private func loadData() {
-        VKGroup().get(userId: nil, completion: {[weak self] groups in
-            try! self?.realm.write {
-                self?.realm.add(groups, update: .all)
-            }
-        })
+        VKRequestFactory(viewController: self).loadGroupList(by: nil)
     }
     
     
-    private func loadRealmData() -> Results<Group>  {
-        return realm.objects(Group.self).sorted(byKeyPath: "name", ascending: true)
+    private func loadRealmData() -> Results<VKGroup>  {
+        return realm.objects(VKGroup.self).sorted(byKeyPath: "name", ascending: true)
     }
     
 }

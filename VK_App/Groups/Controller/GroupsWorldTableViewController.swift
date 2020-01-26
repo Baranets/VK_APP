@@ -10,7 +10,7 @@ class GroupsWorldViewController: UITableViewController {
     //MARK: - Variables
     
     ///[EN]Array with filtered list of groups /[RU]Массив с отфильтрованным списком групп
-    var filteredGroups = [Group]()
+    var filteredGroups = [VKGroup]()
     
     //MARK: - View Functions
 
@@ -66,9 +66,11 @@ extension GroupsWorldViewController: UISearchBarDelegate {
             filteredGroups.removeAll()
             tableView.reloadData()
         } else {
-            VKGroup().search(by: searchText, completion: { [weak self] groups in
-                self?.filteredGroups = groups
-                self?.tableView.reloadData()
+            VKGroupRequest().search(by: searchText, completion: { [weak self] response in
+                self?.filteredGroups = response.response.items
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             })
         }
     }
