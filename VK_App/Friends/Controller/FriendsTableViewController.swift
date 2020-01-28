@@ -9,6 +9,12 @@ class FriendsViewController: UITableViewController {
     var friends: Results<VKFriend>?
     var notificationToken: NotificationToken?
   
+    let queue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.qualityOfService = .userInteractive
+        return queue
+    }()
+    
     //MARK: - View Functions
     
     override func viewDidLoad() {
@@ -72,6 +78,27 @@ class FriendsViewController: UITableViewController {
 
         guard let user = friends?[indexPath.row] else { return cell }
         cell.friend = user
+        
+        guard let url = user.photoURL else { return cell }
+        let getCachedImage = GetCachedImageOperation(url: url)
+        let setCachedImage = SetCachedImageTableViewCellOperation(tableView: tableView, cell: cell, indexPath: indexPath)
+        { (image) in
+            cell.userImageView.image = image
+        }
+        
+        setCachedImage.addDependency(getCachedImage)
+        queue.addOperation(getCachedImage)
+        OperationQueue.main.addOperation(setCachedImage)
+           
+        /*
+         AlamofireImage containce imagecaching with lifeTime 1 day. And auto cleaning after 150Mb
+        cell.userImageView.af_setImage(
+            withURL: url,
+            placeholderImage: UIImage(),
+            progressQueue: .global(qos: .userInteractive),
+            imageTransition: .crossDissolve(0.2),
+            runImageTransitionIfCached: false)
+        */
         
         return cell
     }

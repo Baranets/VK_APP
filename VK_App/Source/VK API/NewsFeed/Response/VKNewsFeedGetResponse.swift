@@ -87,14 +87,14 @@ struct VKAttachment: Codable {
 
 // MARK: - Audio
 struct VKAudio: Codable {
-    let artist: String
-    let id, ownerId: Int
-    let title: String
-    let duration: Int
-    let trackCode: String
-    let url: String
-    let date, albumId: Int
-    let mainArtists: [MainArtist]
+    let artist: String?
+    let id, ownerId: Int?
+    let title: String?
+    let duration: Int?
+    let trackCode: String?
+    let url: String?
+    let date, albumId: Int?
+    let mainArtists: [MainArtist]?
 
     enum CodingKeys: String, CodingKey {
         case artist, id
@@ -109,7 +109,7 @@ struct VKAudio: Codable {
 
 // MARK: - MainArtist
 struct MainArtist: Codable {
-    let name, domain, id: String
+    let name, domain, id: String?
 }
 
 // MARK: - Comments

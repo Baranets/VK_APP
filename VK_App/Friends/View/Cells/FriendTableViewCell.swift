@@ -15,16 +15,17 @@ class FriendTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var onlineLabel: UILabel!
     
-    var friend: VKFriend? {
+    weak var tableView: UITableView?
+    weak var queue: OperationQueue?
+    var indexPath: IndexPath?
+    
+    weak var friend: VKFriend? {
         didSet {
             guard let friend = friend else { return }
             
             nameLabel.text = friend.fullSurname
             onlineLabel.text = friend.isOnline ? "online" : "offline"
             onlineLabel.textColor = friend.isOnline ? .systemGreen : .systemGray
-            
-            guard let url = friend.photoURL else { return }
-            userImageView.af_setImage(withURL: url, placeholderImage: UIImage(), progressQueue: DispatchQueue.global(qos: .utility), imageTransition: UIImageView.ImageTransition.crossDissolve(0.2), runImageTransitionIfCached: false)
         }
     }
     

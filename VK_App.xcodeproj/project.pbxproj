@@ -24,6 +24,8 @@
 		5046A04D23DE1142006822E0 /* VKGroupGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5046A04C23DE1142006822E0 /* VKGroupGetResponse.swift */; };
 		5059EB262376B4C000D693E5 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5059EB242376B4C000D693E5 /* GroupTableViewCell.swift */; };
 		5059EB272376B4C000D693E5 /* GroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5059EB252376B4C000D693E5 /* GroupTableViewCell.xib */; };
+		5061DD0B23E067FC001A3A64 /* GetCachedImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5061DD0A23E067FC001A3A64 /* GetCachedImageOperation.swift */; };
+		5061DD0F23E0752C001A3A64 /* SetCachedImageTableViewCellOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5061DD0E23E0752C001A3A64 /* SetCachedImageTableViewCellOperation.swift */; };
 		50783C2B23718F2A009EE2A3 /* VKConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50783C2A23718F2A009EE2A3 /* VKConfiguration.swift */; };
 		50783C2D23719D69009EE2A3 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50783C2C23719D69009EE2A3 /* ImageDownloader.swift */; };
 		50783C2F2371A209009EE2A3 /* UIWindow+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50783C2E2371A209009EE2A3 /* UIWindow+Extention.swift */; };
@@ -71,6 +73,8 @@
 		5046A04C23DE1142006822E0 /* VKGroupGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKGroupGetResponse.swift; sourceTree = "<group>"; };
 		5059EB242376B4C000D693E5 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		5059EB252376B4C000D693E5 /* GroupTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupTableViewCell.xib; sourceTree = "<group>"; };
+		5061DD0A23E067FC001A3A64 /* GetCachedImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCachedImageOperation.swift; sourceTree = "<group>"; };
+		5061DD0E23E0752C001A3A64 /* SetCachedImageTableViewCellOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCachedImageTableViewCellOperation.swift; sourceTree = "<group>"; };
 		50783C2A23718F2A009EE2A3 /* VKConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKConfiguration.swift; sourceTree = "<group>"; };
 		50783C2C23719D69009EE2A3 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		50783C2E2371A209009EE2A3 /* UIWindow+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extention.swift"; sourceTree = "<group>"; };
@@ -120,8 +124,8 @@
 		503FBB4F23DDD18E006C7737 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				503FBB5423DDDF64006C7737 /* RealmOperation.swift */,
-				503FBB5023DDD1AA006C7737 /* RealmSaveOperation.swift */,
+				5061DD0D23E0741D001A3A64 /* CachedImage */,
+				5061DD0C23E07415001A3A64 /* Realm */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -218,6 +222,33 @@
 				5046A04A23DE0FFE006822E0 /* VKGroup.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		5061DD0923E06733001A3A64 /* GroupTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5059EB242376B4C000D693E5 /* GroupTableViewCell.swift */,
+				5059EB252376B4C000D693E5 /* GroupTableViewCell.xib */,
+			);
+			path = GroupTableViewCell;
+			sourceTree = "<group>";
+		};
+		5061DD0C23E07415001A3A64 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				503FBB5423DDDF64006C7737 /* RealmOperation.swift */,
+				503FBB5023DDD1AA006C7737 /* RealmSaveOperation.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		5061DD0D23E0741D001A3A64 /* CachedImage */ = {
+			isa = PBXGroup;
+			children = (
+				5061DD0A23E067FC001A3A64 /* GetCachedImageOperation.swift */,
+				5061DD0E23E0752C001A3A64 /* SetCachedImageTableViewCellOperation.swift */,
+			);
+			path = CachedImage;
 			sourceTree = "<group>";
 		};
 		5084F8FE2379D11300ABBCAB /* Newsfeed */ = {
@@ -338,9 +369,8 @@
 		50D383AD236AC5370054DCF6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5061DD0923E06733001A3A64 /* GroupTableViewCell */,
 				5084F8FB2379D01F00ABBCAB /* Groups.storyboard */,
-				5059EB242376B4C000D693E5 /* GroupTableViewCell.swift */,
-				5059EB252376B4C000D693E5 /* GroupTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -695,12 +725,14 @@
 				5092EAAE23DDCC28007FEBFB /* VKFriendGetResponse.swift in Sources */,
 				503FBB5523DDDF64006C7737 /* RealmOperation.swift in Sources */,
 				9435CF85212D7FC7002689E7 /* AlertBuilder.swift in Sources */,
+				5061DD0B23E067FC001A3A64 /* GetCachedImageOperation.swift in Sources */,
 				5046A04723DE05E6006822E0 /* VKNewsFeedGetResponse.swift in Sources */,
 				5043DB6E215063D3007B4E4A /* WebViewController.swift in Sources */,
 				5042186A23721BFC00502463 /* FriendTableViewCell.swift in Sources */,
 				503FBB5D23DDE4F1006C7737 /* VKCity.swift in Sources */,
 				5084F90D2379E2E300ABBCAB /* VKNewsFeed.swift in Sources */,
 				5084F9052379D40200ABBCAB /* NewsfeedTableViewController.swift in Sources */,
+				5061DD0F23E0752C001A3A64 /* SetCachedImageTableViewCellOperation.swift in Sources */,
 				50BA58C0219B654500982E3F /* UIImageView.swift in Sources */,
 				50421867237216AE00502463 /* VKPhotos.swift in Sources */,
 				94EA34B8213088D600EE22E1 /* ImagesFriendCollectionViewController.swift in Sources */,
