@@ -18,7 +18,7 @@ class GroupsWorldViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 100  
-        tableView.register(UINib(nibName: GroupTableViewCell.cellIdentifire, bundle: nil), forCellReuseIdentifier: GroupTableViewCell.cellIdentifire)
+        tableView.register(GroupTableViewCell.nib, forCellReuseIdentifier: GroupTableViewCell.cellIdentifier)
         
         searchController.dimsBackgroundDuringPresentation = false
         self.navigationItem.hidesSearchBarWhenScrolling   = false
@@ -43,7 +43,7 @@ class GroupsWorldViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCell.cellIdentifire) as! GroupTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCell.cellIdentifier) as! GroupTableViewCell
         
         let group = filteredGroups[indexPath.row]
         cell.group = group

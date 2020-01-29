@@ -7,13 +7,11 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class GroupTableViewCell: UITableViewCell {
 
-    class var cellIdentifire: String {
-        return "GroupTableViewCell"
-    }
-    
     @IBOutlet weak var groupImageView: UIImageView!
     @IBOutlet weak var groupNameLabel: UILabel!
     @IBOutlet weak var addGroupButton: UIButton!

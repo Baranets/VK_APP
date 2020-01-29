@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50001EB123E1729A000A2652 /* FriendTableViewCellCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50001EB023E1729A000A2652 /* FriendTableViewCellCode.swift */; };
+		50001EB323E18378000A2652 /* GroupTableViewCellCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50001EB223E18378000A2652 /* GroupTableViewCellCode.swift */; };
 		503FBB4E23DDCFD7006C7737 /* VKRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503FBB4D23DDCFD7006C7737 /* VKRequestFactory.swift */; };
 		503FBB5123DDD1AA006C7737 /* RealmSaveOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503FBB5023DDD1AA006C7737 /* RealmSaveOperation.swift */; };
 		503FBB5523DDDF64006C7737 /* RealmOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503FBB5423DDDF64006C7737 /* RealmOperation.swift */; };
@@ -27,7 +29,6 @@
 		5061DD0B23E067FC001A3A64 /* GetCachedImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5061DD0A23E067FC001A3A64 /* GetCachedImageOperation.swift */; };
 		5061DD0F23E0752C001A3A64 /* SetCachedImageTableViewCellOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5061DD0E23E0752C001A3A64 /* SetCachedImageTableViewCellOperation.swift */; };
 		50783C2B23718F2A009EE2A3 /* VKConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50783C2A23718F2A009EE2A3 /* VKConfiguration.swift */; };
-		50783C2D23719D69009EE2A3 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50783C2C23719D69009EE2A3 /* ImageDownloader.swift */; };
 		50783C2F2371A209009EE2A3 /* UIWindow+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50783C2E2371A209009EE2A3 /* UIWindow+Extention.swift */; };
 		5084F8F22379CE5000ABBCAB /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5084F8F02379CE5000ABBCAB /* Friends.storyboard */; };
 		5084F8F52379CE6C00ABBCAB /* RootTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5084F8F32379CE6C00ABBCAB /* RootTabBar.storyboard */; };
@@ -56,6 +57,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		50001EB023E1729A000A2652 /* FriendTableViewCellCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCellCode.swift; sourceTree = "<group>"; };
+		50001EB223E18378000A2652 /* GroupTableViewCellCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCellCode.swift; sourceTree = "<group>"; };
 		503FBB4D23DDCFD7006C7737 /* VKRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKRequestFactory.swift; sourceTree = "<group>"; };
 		503FBB5023DDD1AA006C7737 /* RealmSaveOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSaveOperation.swift; sourceTree = "<group>"; };
 		503FBB5423DDDF64006C7737 /* RealmOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmOperation.swift; sourceTree = "<group>"; };
@@ -76,7 +79,6 @@
 		5061DD0A23E067FC001A3A64 /* GetCachedImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCachedImageOperation.swift; sourceTree = "<group>"; };
 		5061DD0E23E0752C001A3A64 /* SetCachedImageTableViewCellOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCachedImageTableViewCellOperation.swift; sourceTree = "<group>"; };
 		50783C2A23718F2A009EE2A3 /* VKConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKConfiguration.swift; sourceTree = "<group>"; };
-		50783C2C23719D69009EE2A3 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		50783C2E2371A209009EE2A3 /* UIWindow+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extention.swift"; sourceTree = "<group>"; };
 		5084F8F12379CE5000ABBCAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Friends.storyboard; sourceTree = "<group>"; };
 		5084F8F42379CE6C00ABBCAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RootTabBar.storyboard; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				5042186823721BFC00502463 /* FriendTableViewCell.swift */,
 				5042186923721BFC00502463 /* FriendTableViewCell.xib */,
+				50001EB023E1729A000A2652 /* FriendTableViewCellCode.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			children = (
 				5059EB242376B4C000D693E5 /* GroupTableViewCell.swift */,
 				5059EB252376B4C000D693E5 /* GroupTableViewCell.xib */,
+				50001EB223E18378000A2652 /* GroupTableViewCellCode.swift */,
 			);
 			path = GroupTableViewCell;
 			sourceTree = "<group>";
@@ -397,7 +401,6 @@
 		50D383B0236AC58F0054DCF6 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				50783C2C23719D69009EE2A3 /* ImageDownloader.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -709,14 +712,15 @@
 			files = (
 				50D70DCE219DB7F2003F9529 /* VKGroupRequest.swift in Sources */,
 				5046A04B23DE0FFE006822E0 /* VKGroup.swift in Sources */,
+				50001EB323E18378000A2652 /* GroupTableViewCellCode.swift in Sources */,
 				5043DB7121506FCB007B4E4A /* VKAuth.swift in Sources */,
 				5059EB262376B4C000D693E5 /* GroupTableViewCell.swift in Sources */,
 				503FBB5123DDD1AA006C7737 /* RealmSaveOperation.swift in Sources */,
 				9471E3522128F86200730643 /* ViewController.swift in Sources */,
 				50783C2F2371A209009EE2A3 /* UIWindow+Extention.swift in Sources */,
 				947EA06D212D2A2100490D35 /* FriendsTableViewController.swift in Sources */,
+				50001EB123E1729A000A2652 /* FriendTableViewCellCode.swift in Sources */,
 				9471E3502128F86200730643 /* AppDelegate.swift in Sources */,
-				50783C2D23719D69009EE2A3 /* ImageDownloader.swift in Sources */,
 				50D70DCC219DB70B003F9529 /* VKFriends.swift in Sources */,
 				94F0D61E2131EC620063ECFE /* GroupsWorldTableViewController.swift in Sources */,
 				503FBB6623DDEC15006C7737 /* VKPhotoGetResponse.swift in Sources */,

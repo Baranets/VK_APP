@@ -22,6 +22,8 @@ class FriendsViewController: UITableViewController {
         
         tableView.register(FriendTableViewCell.nib,
                            forCellReuseIdentifier: FriendTableViewCell.cellIdentifier)
+        tableView.register(FriendTableViewCellCode.self,
+                           forCellReuseIdentifier: FriendTableViewCellCode.cellIdentifier)
         tableView.estimatedRowHeight = 600
 
         let refreshcontrol = UIRefreshControl()
@@ -29,8 +31,6 @@ class FriendsViewController: UITableViewController {
         tableView.refreshControl = refreshcontrol
         
         configureRealm()
-        
-        
         
         loadData()
     }
@@ -73,8 +73,12 @@ class FriendsViewController: UITableViewController {
         return friends?.count ?? 0
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return FriendTableViewCellCode.preferredRowHeight
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCell.cellIdentifier, for: indexPath) as! FriendTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCellCode.cellIdentifier, for: indexPath) as! FriendTableViewCellCode
 
         guard let user = friends?[indexPath.row] else { return cell }
         cell.friend = user

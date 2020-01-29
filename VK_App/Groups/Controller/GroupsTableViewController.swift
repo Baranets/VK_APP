@@ -21,7 +21,8 @@ class GroupsViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 100
-        tableView.register(UINib(nibName: GroupTableViewCell.cellIdentifire, bundle: nil), forCellReuseIdentifier: GroupTableViewCell.cellIdentifire)
+        tableView.register(GroupTableViewCell.nib, forCellReuseIdentifier: GroupTableViewCell.cellIdentifier)
+        tableView.register(GroupTableViewCellCode.self, forCellReuseIdentifier: GroupTableViewCellCode.cellIdentifier)
         
         let refreshcontrol = UIRefreshControl()
         refreshcontrol.addTarget(self, action: #selector (GroupsViewController.loadData), for: UIControl.Event.valueChanged)
@@ -83,7 +84,7 @@ class GroupsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCell.cellIdentifire) as! GroupTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCellCode.cellIdentifier) as! GroupTableViewCellCode
         
         cell.group = groups?[indexPath.row]
         
