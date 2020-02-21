@@ -1,0 +1,10 @@
+build/
+DerivedData/
+xcuserdata/
+
+.DS_Store
+
+*.swp
+*~.nib
+*.xccheckout
+*.xcscmblueprint
