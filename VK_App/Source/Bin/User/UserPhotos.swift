@@ -5,8 +5,8 @@ import SwiftyJSON
 ///Class is for storage data about photo
 class UserPhoto {
     
-    var id:    Int
-    var url:   URL
+    var id: Int
+    var url: URL
     
     init(json: JSON) {
         self.id   = json["id"].intValue

@@ -1,10 +1,9 @@
 import UIKit
 import RealmSwift
-import AlamofireImage
 
 class GroupsViewController: UITableViewController {
     
-    //MARK: - UI Objects
+    // MARK: - UI Objects
     let searchBarController = UISearchController(searchResultsController: nil)
     
     let realm = try! Realm()
@@ -16,7 +15,7 @@ class GroupsViewController: UITableViewController {
         searchBarController.dismiss(animated: false, completion: nil)
     }
     
-    //MARK: - View Functions
+    // MARK: - View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,7 +71,6 @@ class GroupsViewController: UITableViewController {
         }
     }
 
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -84,27 +82,26 @@ class GroupsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCellCode.cellIdentifier) as! GroupTableViewCellCode
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCellCode.cellIdentifier) as? GroupTableViewCellCode
+        else { return UITableViewCell() }
         
         cell.group = groups?[indexPath.row]
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle:
-        //[EN]Handling an event with deleting an object from the UITableView /[RU]Обработка события с удалением объект из UITableView
-        UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let group = self.groups?[indexPath.row] else { return }
             VKGroupRequest().leave(groupId: group.id) { [weak self] in
-                try! self?.realm.write {
+                try? self?.realm.write {
                     self?.realm.delete(group)
                 }
             }
   
         }
     }
-    
  
     // Метод предназначен для дальнейшей навигации по UI в зависимости от нажатой строчки
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -115,14 +112,13 @@ class GroupsViewController: UITableViewController {
         VKRequestFactory(viewController: self).loadGroupList(by: nil)
     }
     
-    
-    private func loadRealmData() -> Results<VKGroup>  {
+    private func loadRealmData() -> Results<VKGroup> {
         return realm.objects(VKGroup.self).sorted(byKeyPath: "name", ascending: true)
     }
     
 }
 
-//MARK: - Extension UISearchBarDelegate
+// MARK: - Extension UISearchBarDelegate
 
 extension GroupsViewController: UISearchBarDelegate {
     
@@ -141,6 +137,5 @@ extension GroupsViewController: UISearchBarDelegate {
         groups = loadRealmData()
         tableView.reloadData()
     }
-    
 
 }

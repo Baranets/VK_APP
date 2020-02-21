@@ -18,14 +18,14 @@ class VKGroupRequest: VKConfiguration {
             urlComponents.queryItems?.append(URLQueryItem(name: "user_id", value: String(userId)))
         }
 
-        Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
+        AF.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
             switch response.result {
             case .success (let data):
                 do {
                     let response = try JSONDecoder().decode(VKGroupGetResponse.self, from: data)
 
                     completion(response)
-                } catch(let error) {
+                } catch let error {
                     print(error)
                     print(error.localizedDescription)
                 }
@@ -48,14 +48,14 @@ class VKGroupRequest: VKConfiguration {
             URLQueryItem(name: "q", value: search ?? "")
         ] + defaultQueryItems
         
-        Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
+        AF.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
             switch response.result {
             case .success(let data):
                 do {
                     let response = try JSONDecoder().decode(VKGroupGetResponse.self, from: data)
 
                     completion(response)
-                } catch(let error) {
+                } catch let error {
                     print(error)
                     print(error.localizedDescription)
                 }
@@ -78,7 +78,7 @@ class VKGroupRequest: VKConfiguration {
             URLQueryItem(name: "group_id", value: String(groupId))
         ] + defaultQueryItems
 
-        Alamofire.request(urlComponents.url!).responseData { response in
+        AF.request(urlComponents.url!).responseData { response in
             switch response.result {
             case .success: completion()
             case .failure: break
@@ -87,8 +87,8 @@ class VKGroupRequest: VKConfiguration {
     }
     
     ///Send the request for "Join to the Group"
-    func join(group_id: Int) {
-        guard group_id >= 1 else { return }
+    func join(by groupId: Int) {
+        guard groupId >= 1 else { return }
         
         //[EN]Create a URL request /[RU]Формируем URL запрос
         var urlComponents = self.urlComponents
@@ -96,11 +96,11 @@ class VKGroupRequest: VKConfiguration {
         urlComponents.path   = "/method/groups.join"
         
         urlComponents.queryItems = [
-            URLQueryItem(name: "group_id", value: String(group_id))
+            URLQueryItem(name: "group_id", value: String(groupId))
         ] + defaultQueryItems
         
         //Treatment of the JSON
-        Alamofire.request(urlComponents.url!).responseData { response in
+        AF.request(urlComponents.url!).responseData { response in
             switch response.result {
             case .success: break
             case .failure: break

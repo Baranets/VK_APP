@@ -1,17 +1,16 @@
-
 import UIKit
 import SwiftKeychainWrapper
 
 class ViewController: UIViewController {
 
-    //MARK: - UI Objects
+    // MARK: - UI Objects
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var logButton: UIButton!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    //MARK: - View Functions
+    // MARK: - View Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +43,6 @@ class ViewController: UIViewController {
 
         performSegue(withIdentifier: "loginDone", sender: nil)
     }
-
     
     ///[EN]Creating Classic Alert. Show the text of Alert and the button "OK" /[RU]Создает Классический Alert. Выводит текст и имеет одну кнопку "ОК" для закрытия Alert'а
     func showAlert(title: String, message: String) {
@@ -59,4 +57,3 @@ class ViewController: UIViewController {
     }
 
 }
-

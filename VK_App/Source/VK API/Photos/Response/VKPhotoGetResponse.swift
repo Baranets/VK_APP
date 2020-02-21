@@ -19,8 +19,6 @@ struct VKPhotoGetResponse: Codable {
     }
 }
 
-
-
 // MARK: - Item
 struct VKPhoto: Codable {
     let id: Int
@@ -52,5 +50,3 @@ struct VKPhoto: Codable {
         case accessKey = "access_key"
     }
 }
-
-

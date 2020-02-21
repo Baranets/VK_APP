@@ -19,4 +19,3 @@ struct VKFriendGetResponse: Codable {
     }
     
 }
-

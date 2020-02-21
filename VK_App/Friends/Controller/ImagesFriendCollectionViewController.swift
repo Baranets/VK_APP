@@ -1,22 +1,23 @@
 import UIKit
-import AlamofireImage
+import Kingfisher
 
 class ImagesFriendViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    //MARK: - UI Objects
+    // MARK: - UI Objects
     
-    //MARK: - Variables
+    // MARK: - Variables
 
     var user: VKFriend?
     
     var images = [VKPhoto]()
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        flowLayout.invalidateLayout()
+        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.invalidateLayout()
+        }
     }
     
-    //MARK: - View Functions
+    // MARK: - View Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,6 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
@@ -55,7 +55,14 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
         let image = images[indexPath.row]
         
         guard let url = image.sizes.first?.photoURL else { return cell }
-        imageUsers.af_setImage(withURL: url, placeholderImage: UIImage(), progressQueue: .global(), imageTransition: UIImageView.ImageTransition.crossDissolve(0.2), runImageTransitionIfCached: false)
+        imageUsers.kf.setImage(
+            with: url,
+            placeholder: UIImage(),
+            options: [
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(0.5)),
+                .cacheOriginalImage
+        ])
     
         return cell
     }
@@ -66,4 +73,3 @@ class ImagesFriendViewController: UICollectionViewController, UICollectionViewDe
     }
     
 }
-

@@ -1,35 +1,40 @@
 PODS:
-  - Alamofire (4.9.1)
-  - AlamofireImage (3.6.0):
-    - Alamofire (~> 4.9)
-  - Realm (4.3.1):
-    - Realm/Headers (= 4.3.1)
-  - Realm/Headers (4.3.1)
-  - RealmSwift (4.3.1):
-    - Realm (= 4.3.1)
+  - Alamofire (5.0.0)
+  - Kingfisher (5.13.1):
+    - Kingfisher/Core (= 5.13.1)
+  - Kingfisher/Core (5.13.1)
+  - Realm (4.3.2):
+    - Realm/Headers (= 4.3.2)
+  - Realm/Headers (4.3.2)
+  - RealmSwift (4.3.2):
+    - Realm (= 4.3.2)
   - SwiftKeychainWrapper (3.4.0)
+  - SwiftLint (0.39.1)
 
 DEPENDENCIES:
   - Alamofire
-  - AlamofireImage
+  - Kingfisher
   - RealmSwift
   - SwiftKeychainWrapper
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - AlamofireImage
+    - Kingfisher
     - Realm
     - RealmSwift
     - SwiftKeychainWrapper
+    - SwiftLint
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
-  Realm: 31dc40934081ef740f60feedc46d88473cbfeb40
-  RealmSwift: b5199e9a41f67b99f51acf6874a6166f5fbe93d1
+  Alamofire: 58ff2bfb8daaacaa233d5c36e37b10a5248f59b1
+  Kingfisher: f33a848445e33c543620812158dc5d47f6bf90df
+  Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
+  RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
+  SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
 
-PODFILE CHECKSUM: 1570969d2c420d05b680675c81d00b55ca9abbe1
+PODFILE CHECKSUM: f216a4131175e9a18f46fc4903f8418794c5f756
 
 COCOAPODS: 1.8.4

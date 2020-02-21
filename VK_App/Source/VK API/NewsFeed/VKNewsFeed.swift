@@ -8,11 +8,10 @@
 
 import Foundation
 import Alamofire
-import AlamofireImage
 
 class VKNewsFeed: VKConfiguration {
     
-    func get(startFrom: String?, completion: @escaping (VKNewsFeedGetResponse) -> ()) {
+    func get(startFrom: String?, completion: @escaping (VKNewsFeedGetResponse) -> Void) {
         var urlComponents = self.urlComponents
         urlComponents.path = "/method/newsfeed.get"
         
@@ -25,8 +24,7 @@ class VKNewsFeed: VKConfiguration {
             urlComponents.queryItems?.append(URLQueryItem(name: "start_from", value: startFrom))
         }
         
-        
-        Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { (response) in
+        AF.request(urlComponents.url!).responseData(queue: dispatchQueue) { (response) in
             switch response.result {
             case .success(let data):
                 do {

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class GroupTableViewCellCode: UITableViewCell {
     
@@ -23,12 +24,14 @@ class GroupTableViewCellCode: UITableViewCell {
             addGroupButton.isHidden = group.isMember == 1
             
             guard let url = URL(string: group.photo100) else { return }
-            
-            groupImageView.af_setImage(withURL: url,
-                                       placeholderImage: UIImage(),
-                                       progressQueue: .global(qos: .userInteractive),
-                                       imageTransition: .crossDissolve(0.2),
-                                       runImageTransitionIfCached: false)
+            groupImageView.kf.setImage(
+                with: url,
+                placeholder: UIImage(),
+                options: [
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(0.5)),
+                    .cacheOriginalImage
+            ])
         }
     }
     

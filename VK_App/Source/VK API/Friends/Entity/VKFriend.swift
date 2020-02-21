@@ -34,8 +34,6 @@ class VKFriend: Object, Codable {
     var photoURL: URL? {
         return URL(string: photo)
     }
-
-    
     
     override static func primaryKey() -> String? {
         return "id"

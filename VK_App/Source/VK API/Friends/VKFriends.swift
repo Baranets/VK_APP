@@ -24,13 +24,13 @@ class VKFriends: VKConfiguration {
             URLQueryItem(name: "fields", value: "city,domain,photo")
         ] + defaultQueryItems
         
-        Alamofire.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
+        AF.request(urlComponents.url!).responseData(queue: dispatchQueue) { response in
             switch response.result {
             case .success(let data):
                 do {
                     let response = try JSONDecoder().decode(VKFriendGetResponse.self, from: data)
                     completion(response)
-                } catch (let error) {
+                } catch let error {
                     print(error)
                     print(error.localizedDescription)
                 }

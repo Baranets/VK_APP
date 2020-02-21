@@ -43,7 +43,7 @@ class RealmSaveOperation: RealmOperation {
                     realm.add(entities, update: update)
                 }
             }
-        } catch (let error) {
+        } catch let error {
             print(error)
             print(error.localizedDescription)
         }

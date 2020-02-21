@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
+import Kingfisher
 
 class GroupTableViewCell: UITableViewCell {
 
@@ -24,15 +24,16 @@ class GroupTableViewCell: UITableViewCell {
             addGroupButton.isHidden = group.isMember == 1
             
             guard let url = URL(string: group.photo100) else { return }
-            
-            groupImageView.af_setImage(withURL: url,
-                                       placeholderImage: UIImage(),
-                                       progressQueue: .global(qos: .utility),
-                                       imageTransition: .crossDissolve(0.2),
-                                       runImageTransitionIfCached: false)
+            groupImageView.kf.setImage(
+                with: url,
+                placeholder: UIImage(),
+                options: [
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(0.5)),
+                    .cacheOriginalImage
+            ])
         }
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,12 +49,11 @@ class GroupTableViewCell: UITableViewCell {
     
     @IBAction func pressedAddGroupButton(_ sender: Any) {
         guard let group = self.group else { return }
-        VKGroupRequest().join(group_id: group.id)
+        VKGroupRequest().join(by: group.id)
             DispatchQueue.main.async {
                 self.addGroupButton.isHidden = true
         }
     }
-    
     
     private func configure() {
         let layer = groupImageView.layer

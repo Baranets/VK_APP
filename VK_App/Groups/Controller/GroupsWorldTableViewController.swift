@@ -1,18 +1,17 @@
 import UIKit
-import AlamofireImage
 
 class GroupsWorldViewController: UITableViewController {
 
-    //MARK: - UI Objects
+    // MARK: - UI Objects
 
     let searchController = UISearchController(searchResultsController: nil)
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     ///[EN]Array with filtered list of groups /[RU]Массив с отфильтрованным списком групп
     var filteredGroups = [VKGroup]()
     
-    //MARK: - View Functions
+    // MARK: - View Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +42,9 @@ class GroupsWorldViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCell.cellIdentifier) as! GroupTableViewCell
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: GroupTableViewCell.cellIdentifier) as? GroupTableViewCell
+        else { return UITableViewCell() }
         
         let group = filteredGroups[indexPath.row]
         cell.group = group
@@ -57,7 +58,7 @@ class GroupsWorldViewController: UITableViewController {
     
 }
 
-//MARK: - Extension UISearchBarDelegate
+// MARK: - Extension UISearchBarDelegate
 
 extension GroupsWorldViewController: UISearchBarDelegate {
     

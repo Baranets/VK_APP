@@ -44,7 +44,9 @@ class NewsfeedTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.cellIdentifier, for: indexPath) as! PostTableViewCell
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.cellIdentifier, for: indexPath) as? PostTableViewCell
+        else { return UITableViewCell() }
 
         let post = posts[indexPath.row]
         let group = groups.first(where: {$0.id == post.sourceId || -$0.id == post.sourceId})

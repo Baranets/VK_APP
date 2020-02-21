@@ -2,9 +2,9 @@ import UIKit
 import SwiftKeychainWrapper
 import WebKit
 
-class WebViewController: UIViewController{
+class WebViewController: UIViewController {
 
-    //MARK: - View Functions
+    // MARK: - View Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class WebViewController: UIViewController{
     
 }
 
-//MARK: - Extension WKNavigationDelegate
+// MARK: - Extension WKNavigationDelegate
 
 extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {

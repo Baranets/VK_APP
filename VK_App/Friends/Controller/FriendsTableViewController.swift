@@ -1,10 +1,9 @@
 import UIKit
-import AlamofireImage
 import RealmSwift
 
 class FriendsViewController: UITableViewController {
 
-    //MARK: - Variables
+    // MARK: - Variables
     
     var friends: Results<VKFriend>?
     var notificationToken: NotificationToken?
@@ -15,7 +14,7 @@ class FriendsViewController: UITableViewController {
         return queue
     }()
     
-    //MARK: - View Functions
+    // MARK: - View Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +29,12 @@ class FriendsViewController: UITableViewController {
         refreshcontrol.addTarget(self, action: #selector(FriendsViewController.loadData), for: UIControl.Event.valueChanged)
         tableView.refreshControl = refreshcontrol
         
-        configureRealm()
+        do {
+            try configureRealm()
+        } catch let error {
+            print(error)
+            print(error.localizedDescription)
+        }
         
         loadData()
     }
@@ -39,8 +43,8 @@ class FriendsViewController: UITableViewController {
         notificationToken?.invalidate()
     }
     
-    private func configureRealm() {
-        let realm = try! Realm()
+    private func configureRealm() throws {
+        let realm = try Realm()
         friends = realm.objects(VKFriend.self).sorted(byKeyPath: "lastName", ascending: true)
 
         notificationToken = friends?.observe { [weak self] (changes: RealmCollectionChange) in
@@ -78,45 +82,28 @@ class FriendsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCellCode.cellIdentifier, for: indexPath) as! FriendTableViewCellCode
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCellCode.cellIdentifier, for: indexPath) as? FriendTableViewCellCode
+        else { return UITableViewCell() }
 
         guard let user = friends?[indexPath.row] else { return cell }
         cell.friend = user
-        
-        guard let url = user.photoURL else { return cell }
-        let getCachedImage = GetCachedImageOperation(url: url)
-        let setCachedImage = SetCachedImageTableViewCellOperation(tableView: tableView, cell: cell, indexPath: indexPath)
-        { (image) in
-            cell.userImageView.image = image
-        }
-        
-        setCachedImage.addDependency(getCachedImage)
-        queue.addOperation(getCachedImage)
-        OperationQueue.main.addOperation(setCachedImage)
-           
-        /*
-         AlamofireImage containce imagecaching with lifeTime 1 day. And auto cleaning after 150Mb
-        cell.userImageView.af_setImage(
-            withURL: url,
-            placeholderImage: UIImage(),
-            progressQueue: .global(qos: .userInteractive),
-            imageTransition: .crossDissolve(0.2),
-            runImageTransitionIfCached: false)
-        */
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let friendDelete = friends?[indexPath.row] else { return }
-            let realm = try! Realm()
+            guard
+                let friendDelete = friends?[indexPath.row],
+                let realm = try? Realm()
+            else { return }
+            
             try? realm.write {
                 realm.delete(friendDelete)
             }
         }
     }
-
 
     @objc private func loadData() {
         VKRequestFactory(viewController: self).loadFriendList(by: nil)
@@ -131,7 +118,7 @@ class FriendsViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         if segue.identifier == "toStory" {
-            let datailVC = segue.destination as! ImagesFriendViewController
+            guard let datailVC = segue.destination as? ImagesFriendViewController else { return }
             datailVC.user = friends?[indexPath.row]
         }
     }

@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 
-
 // MARK: - City
 class VKCity: Object, Codable {
     @objc dynamic var id: Int = 0

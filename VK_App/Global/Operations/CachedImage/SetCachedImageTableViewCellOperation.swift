@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import AlamofireImage
 
 class SetCachedImageTableViewCellOperation: Operation {
     
@@ -19,9 +18,9 @@ class SetCachedImageTableViewCellOperation: Operation {
     private let indexPath: IndexPath
     private let tableView: UITableView
     private let cell: UITableViewCell
-    private let completion: ((UIImage?) -> ())?
+    private let completion: ((UIImage?) -> Void)?
     
-    init(tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, completion: ((UIImage?) -> ())? = nil) {
+    init(tableView: UITableView, cell: UITableViewCell, indexPath: IndexPath, completion: ((UIImage?) -> Void)? = nil) {
         self.tableView = tableView
         self.cell = cell
         self.indexPath = indexPath

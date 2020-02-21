@@ -1,4 +1,3 @@
-
 import Foundation
 import UIKit
 
@@ -6,11 +5,11 @@ import UIKit
 protocol Human: Entity {
     
     ///ИД пользователя
-    var id : Int          { get }
+    var id: Int { get }
     ///Фамилия пользователя
-    var surname: String   { get }
+    var surname: String { get }
     ///Возраст пользователя
-    var age: Int          { get }
+    var age: Int { get }
     
     ///Возвращает Фамилию(surname) и Имя(name) пользователя(User)
     func getFullSurname() -> String

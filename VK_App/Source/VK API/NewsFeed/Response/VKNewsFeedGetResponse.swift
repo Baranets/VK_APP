@@ -26,8 +26,6 @@ struct Response: Codable {
     }
 }
 
-
-
 // MARK: - Item
 struct VKPost: Codable {
     let canDoubtCategory, canSetCategory: Bool?

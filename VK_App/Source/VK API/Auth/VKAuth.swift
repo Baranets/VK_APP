@@ -36,7 +36,7 @@ class VKAuth: VKConfiguration {
         
         urlComponents.path   = "/logout"
         
-        Alamofire.request(urlComponents.url!).responseData(completionHandler: { response in
+        AF.request(urlComponents.url!).responseData(completionHandler: { response in
             switch response.result {
             case .success:
                 VKAuth.token = nil
@@ -61,6 +61,5 @@ class VKAuth: VKConfiguration {
 
         return token
     }
-    
     
 }

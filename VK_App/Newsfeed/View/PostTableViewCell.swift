@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PostTableViewCell: UITableViewCell {
     
@@ -34,21 +35,31 @@ class PostTableViewCell: UITableViewCell {
         commentButton.setTitle(String(post.comments.count), for: .normal)
         
         if let postURL = (post.attachments?.first?.media as? VKPhoto)?.sizes.last?.photoURL {
-            postImageView.af_setImage(withURL: postURL,
-                                      placeholderImage: UIImage(),
-                                      progressQueue: .global(qos: .utility),
-                                      imageTransition: .crossDissolve(0.2),
-                                      runImageTransitionIfCached: false)
+            let processor = DownsamplingImageProcessor(size: postImageView.bounds.size)
+            postImageView.kf.setImage(
+                with: postURL,
+                placeholder: UIImage(),
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(0.5)),
+                    .cacheOriginalImage
+            ])
         }
         
         guard let group = group else { return }
         groupNameLabel.text = group.name
         if let groupURL = URL(string: group.photo100) {
-            groupImageView.af_setImage(withURL: groupURL,
-                                       placeholderImage: UIImage(),
-                                       progressQueue: .global(qos: .utility),
-                                       imageTransition: .crossDissolve(0.2),
-                                       runImageTransitionIfCached: false)
+            let processor = DownsamplingImageProcessor(size: groupImageView.bounds.size)
+            groupImageView.kf.setImage(
+                with: groupURL,
+                placeholder: UIImage(),
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(0.5)),
+                    .cacheOriginalImage
+            ])
         }
     }
     

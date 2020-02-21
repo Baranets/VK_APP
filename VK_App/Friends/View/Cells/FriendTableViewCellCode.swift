@@ -22,6 +22,15 @@ class FriendTableViewCellCode: UITableViewCell {
             nameLabel.text = friend.fullSurname
             onlineLabel.text = friend.isOnline ? "online" : "offline"
             onlineLabel.textColor = friend.isOnline ? .systemGreen : .systemGray
+            guard let url = friend.photoURL else { return }
+            userImageView.kf.setImage(
+                with: url,
+                placeholder: UIImage(),
+                options: [
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(0.3)),
+                    .cacheOriginalImage
+            ])
         }
     }
     
@@ -65,7 +74,6 @@ class FriendTableViewCellCode: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(userImageView)
         addSubview(stackView)
-        
 
         setImageViewConstraints()
         setStackViewConstraints()

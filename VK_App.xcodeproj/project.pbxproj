@@ -53,10 +53,11 @@
 		947EA06F212D502000490D35 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947EA06E212D502000490D35 /* GroupsTableViewController.swift */; };
 		94EA34B8213088D600EE22E1 /* ImagesFriendCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EA34B7213088D600EE22E1 /* ImagesFriendCollectionViewController.swift */; };
 		94F0D61E2131EC620063ECFE /* GroupsWorldTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F0D61D2131EC620063ECFE /* GroupsWorldTableViewController.swift */; };
-		F1EC368EC15439FC0F7AA009 /* Pods_VK_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69CB201EB6E0155930F9479 /* Pods_VK_App.framework */; };
+		EBC6CCBA0C7C740A8EEF160A /* libPods-VK_App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 098AD0000AE408E52E6D3788 /* libPods-VK_App.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		098AD0000AE408E52E6D3788 /* libPods-VK_App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VK_App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50001EB023E1729A000A2652 /* FriendTableViewCellCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCellCode.swift; sourceTree = "<group>"; };
 		50001EB223E18378000A2652 /* GroupTableViewCellCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCellCode.swift; sourceTree = "<group>"; };
 		503FBB4D23DDCFD7006C7737 /* VKRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKRequestFactory.swift; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 		947EA06E212D502000490D35 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 		94EA34B7213088D600EE22E1 /* ImagesFriendCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesFriendCollectionViewController.swift; sourceTree = "<group>"; };
 		94F0D61D2131EC620063ECFE /* GroupsWorldTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsWorldTableViewController.swift; sourceTree = "<group>"; };
-		A69CB201EB6E0155930F9479 /* Pods_VK_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VK_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1EC368EC15439FC0F7AA009 /* Pods_VK_App.framework in Frameworks */,
+				EBC6CCBA0C7C740A8EEF160A /* libPods-VK_App.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,7 +575,7 @@
 		BFBA524919930E182CB8A094 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A69CB201EB6E0155930F9479 /* Pods_VK_App.framework */,
+				098AD0000AE408E52E6D3788 /* libPods-VK_App.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -597,18 +597,16 @@
 			buildConfigurationList = 9471E35E2128F86300730643 /* Build configuration list for PBXNativeTarget "VK_App" */;
 			buildPhases = (
 				ABA0D580C6BB04024C808D7D /* [CP] Check Pods Manifest.lock */,
+				50BE1232240009F000670C0D /* SwiftLint */,
 				9471E3482128F86200730643 /* Sources */,
 				9471E3492128F86200730643 /* Frameworks */,
 				9471E34A2128F86200730643 /* Resources */,
-				2025F373C8BD046754C34AB9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = VK_App;
-			packageProductDependencies = (
-			);
 			productName = VK_App;
 			productReference = 9471E34C2128F86200730643 /* VK_App.app */;
 			productType = "com.apple.product-type.application";
@@ -668,22 +666,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2025F373C8BD046754C34AB9 /* [CP] Embed Pods Frameworks */ = {
+		50BE1232240009F000670C0D /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VK_App/Pods-VK_App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
+			name = SwiftLint;
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VK_App/Pods-VK_App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VK_App/Pods-VK_App-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		ABA0D580C6BB04024C808D7D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -846,7 +845,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -900,7 +899,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
